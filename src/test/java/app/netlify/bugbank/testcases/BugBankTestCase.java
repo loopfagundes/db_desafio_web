@@ -1,6 +1,6 @@
 package app.netlify.bugbank.testcases;
 
-import app.netlify.bugbank.steps.CadastraPrimeiraContaStep;
+import app.netlify.bugbank.steps.CreateAccountStep;
 import app.netlify.bugbank.utils.BaseTest;
 import app.netlify.bugbank.utils.Property;
 import app.netlify.bugbank.webdrivers.DriverManager;
@@ -17,7 +17,7 @@ public class BugBankTestCase extends BaseTest {
     public void BugBank() {
         WebDriver driver = DriverManager.getDriver();
         driver.get(Property.get("url"));
-        CadastraPrimeiraContaStep cadastraPrimeiraContaStep = new CadastraPrimeiraContaStep(driver);
-        cadastraPrimeiraContaStep.indexPage(Property.get("email"), Property.get("password"));
+        CreateAccountStep createAccountStep = new CreateAccountStep(driver);
+        createAccountStep.indexPage(Property.get("email"), Property.get("name"), Property.get("password"));
     }
 }
