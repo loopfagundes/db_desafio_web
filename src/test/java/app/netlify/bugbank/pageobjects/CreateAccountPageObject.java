@@ -24,6 +24,14 @@ public class CreateAccountPageObject {
     }
 
     public Element passwordTextField() {
-        return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[2]/div/input"));
+        return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[4]/div/input"));
+    }
+
+    public Element confirmationPassword() {
+        return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[5]/div/input"));
+    }
+
+    public Element accountBalanceButton() {
+        return new Element(this.driver, By.id("toggleAddBalance"));
     }
 }

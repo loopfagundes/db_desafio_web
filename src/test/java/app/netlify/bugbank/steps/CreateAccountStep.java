@@ -10,16 +10,18 @@ public class CreateAccountStep {
         createAccountPageObject = new CreateAccountPageObject(driver);
     }
 
-    public CreateAccountStep indexPage(String email, String name, String password) {
-        createAUserAccount(email, name, password);
+    public CreateAccountStep indexPage(String email, String name, String password, String confirmationPassword) {
+        createAUserAccount(email, name, password, confirmationPassword);
         return this;
     }
 
-    private CreateAccountStep createAUserAccount(String email, String name, String password) {
+    private CreateAccountStep createAUserAccount(String email, String name, String password, String confirmationPassword) {
         createAccountPageObject.registerButton().click();
         createAccountPageObject.emailTextField().setText(email);
         createAccountPageObject.nameUserTextField().setText(name);
         createAccountPageObject.passwordTextField().setText(password);
+        createAccountPageObject.confirmationPassword().setText(confirmationPassword);
+        //createAccountPageObject.accountBalanceButton().click();
         return this;
     }
 }
