@@ -18,6 +18,8 @@ public class BugBankTestCase extends BaseTest {
         WebDriver driver = DriverManager.getDriver();
         driver.get(Property.get("url"));
         CreateAccountStep createAccountStep = new CreateAccountStep(driver);
-        createAccountStep.indexPage(Property.get("email"), Property.get("name"), Property.get("password"), Property.get("confirmationPassword"));
+        createAccountStep.registerFirstUsers(Property.get("emailFirst"), Property.get("userFirst"), Property.get("passwordUserFirst"), Property.get("confirmationPasswordUserFirst"));
+        driver.navigate().refresh();
+        createAccountStep.registerSecondtUsers(Property.get("emailSecond"), Property.get("userSecond"), Property.get("passwordUserSecond"), Property.get("confirmationPasswordUserSecond"));
     }
 }

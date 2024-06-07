@@ -3,6 +3,7 @@ package app.netlify.bugbank.pageobjects;
 import app.netlify.bugbank.widgets.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class CreateAccountPageObject {
     private final WebDriver driver;
