@@ -13,7 +13,7 @@ public class Element {
     private final WebDriver _driver;
     private final By byElement;
     private WebDriverWait waitDriver;
-    private final Duration duration = Duration.ofSeconds(10);
+    private final Duration duration = Duration.ofSeconds(15);
 
     public Element(WebDriver driver, By by) {
         _driver = driver;

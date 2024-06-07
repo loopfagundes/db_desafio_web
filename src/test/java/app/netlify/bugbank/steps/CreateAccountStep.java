@@ -17,11 +17,12 @@ public class CreateAccountStep {
 
     private CreateAccountStep createAUserAccount(String email, String name, String password, String confirmationPassword) {
         createAccountPageObject.registerButton().click();
-        createAccountPageObject.emailTextField().setText(email);
+        createAccountPageObject.registerEmailTextField().setText(email);
         createAccountPageObject.nameUserTextField().setText(name);
-        createAccountPageObject.passwordTextField().setText(password);
+        createAccountPageObject.registerPasswordTextField().setText(password);
         createAccountPageObject.confirmationPassword().setText(confirmationPassword);
-        //createAccountPageObject.accountBalanceButton().click();
+        createAccountPageObject.registerAccountButton().click();
+        createAccountPageObject.successCloseButton().click();
         return this;
     }
 }

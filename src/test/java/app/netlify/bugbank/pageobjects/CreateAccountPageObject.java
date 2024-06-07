@@ -15,7 +15,7 @@ public class CreateAccountPageObject {
         return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[3]/button[2]"));
     }
 
-    public Element emailTextField() {
+    public Element registerEmailTextField() {                             //*[@id="__next"]/div/div[2]/div/div[1]/form/div[1]/input
         return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[2]/input"));
     }
 
@@ -23,7 +23,7 @@ public class CreateAccountPageObject {
         return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[3]/input"));
     }
 
-    public Element passwordTextField() {
+    public Element registerPasswordTextField() {
         return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[4]/div/input"));
     }
 
@@ -31,7 +31,11 @@ public class CreateAccountPageObject {
         return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[5]/div/input"));
     }
 
-    public Element accountBalanceButton() {
-        return new Element(this.driver, By.id("toggleAddBalance"));
+    public Element registerAccountButton() {
+        return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button"));
+    }
+
+    public Element successCloseButton() {
+        return new Element(this.driver, By.id("btnCloseModal"));
     }
 }
