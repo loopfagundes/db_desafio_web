@@ -3,7 +3,6 @@ package app.netlify.bugbank.pageobjects;
 import app.netlify.bugbank.widgets.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class CreateAccountPageObject {
     private final WebDriver driver;
@@ -28,7 +27,7 @@ public class CreateAccountPageObject {
         return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[4]/div/input"));
     }
 
-    public Element confirmationPassword() {
+    public Element confirmationPasswordTextField() {
         return new Element(this.driver, By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[5]/div/input"));
     }
 

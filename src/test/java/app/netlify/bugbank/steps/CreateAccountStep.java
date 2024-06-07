@@ -28,7 +28,7 @@ public class CreateAccountStep {
         createAccountPageObject.registerEmailTextField().setText(email);
         createAccountPageObject.nameUserTextField().setText(name);
         createAccountPageObject.registerPasswordTextField().setText(password);
-        createAccountPageObject.confirmationPassword().setText(confirmationPassword);
+        createAccountPageObject.confirmationPasswordTextField().setText(confirmationPassword);
         createAccountPageObject.registerAccountButton().click();
         createAccountPageObject.successCloseButton().click();
         return this;
@@ -40,7 +40,7 @@ public class CreateAccountStep {
         createAccountPageObject.registerEmailTextField().setText(email);
         createAccountPageObject.nameUserTextField().setText(name);
         createAccountPageObject.registerPasswordTextField().setText(password);
-        createAccountPageObject.confirmationPassword().setText(confirmationPassword);
+        createAccountPageObject.confirmationPasswordTextField().setText(confirmationPassword);
         createAccountPageObject.registerAccountButton().click();
         createAccountPageObject.successCloseButton().click();
         return this;
