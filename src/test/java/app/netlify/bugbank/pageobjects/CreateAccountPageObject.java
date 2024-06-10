@@ -46,7 +46,7 @@ public class CreateAccountPageObject {
         return wait.toBeClickable(By.id("btnCloseModal"));
     }
 
-    public WebElement accountNumber() {
+    public WebElement accountNumberLabel() {
         return wait.visibilityOf(By.id("modalText"));
     }
 }

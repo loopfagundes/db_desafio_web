@@ -42,7 +42,7 @@ public class RegisterFristUserAccountStep {
         }
         createAccountPageObject.registerAccountButton().click();
 
-        String accountNumber = createAccountPageObject.accountNumber().getText();
+        String accountNumber = createAccountPageObject.accountNumberLabel().getText();
         String[] numberSeparator = accountNumber.split("-");
         String justNumber = numberSeparator[0].replaceAll("[^0-9]", "");
         String accountDigit = numberSeparator[1].replaceAll("[^0-9]", "");
