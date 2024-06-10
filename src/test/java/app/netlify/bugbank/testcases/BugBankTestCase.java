@@ -14,7 +14,6 @@ public class BugBankTestCase extends BaseTest {
 
     @Test(
             description = "Criar duas contas com saldo e realizar uma transferência valor para outra.",
-            priority = 1,
             groups = {"web"}
     )
     public void BugBank() throws IOException {

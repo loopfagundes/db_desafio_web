@@ -1,8 +1,8 @@
 package app.netlify.bugbank.steps;
 
 import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
+import app.netlify.bugbank.supports.RecorderSet;
 import app.netlify.bugbank.utils.Action;
-import app.netlify.bugbank.utils.FilesOperation;
 import app.netlify.bugbank.utils.Report;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
@@ -38,18 +38,8 @@ public class RegisterSecondUserAccountStep {
             Report.log(Status.PASS, "Metodo de Actions: A botao recebeu um cilque");
         }
         createAccountPageObject.registerAccountButton().click();
-        recordNumbers();
+        RecorderSet.recordNumbersSecondUser(createAccountPageObject.accountNumberLabel());
         createAccountPageObject.successCloseButton().click();
         return this;
-    }
-
-    private void recordNumbers() throws IOException {
-        String accountNumber = createAccountPageObject.accountNumberLabel().getText();
-        String[] numberSeparator = accountNumber.split("-");
-        String justNumber = numberSeparator[0].replaceAll("[^0-9]", "");
-        String accountDigit = numberSeparator[1].replaceAll("[^0-9]", "");
-
-        FilesOperation.setProperty("secondUser", "justNumber", justNumber);
-        FilesOperation.setProperty("secondUser", "accountDigit", accountDigit);
     }
 }
