@@ -12,6 +12,8 @@ public class FilesOperation {
             + "test" +
             File.separator
             + "resources"
+            + File.separator
+            + "properties"
             + File.separator;
 
     public static Properties getProperties(String name) throws IOException {
