@@ -41,7 +41,12 @@ public class RegisterFristUserAccountStep {
             Report.log(Status.PASS, "Metodo de Actions: A botao recebeu um cilque");
         }
         createAccountPageObject.registerAccountButton().click();
+        recordNumbers();
+        createAccountPageObject.successCloseButton().click();
+        return this;
+    }
 
+    private void recordNumbers() throws IOException {
         String accountNumber = createAccountPageObject.accountNumberLabel().getText();
         String[] numberSeparator = accountNumber.split("-");
         String justNumber = numberSeparator[0].replaceAll("[^0-9]", "");
@@ -49,8 +54,5 @@ public class RegisterFristUserAccountStep {
 
         FilesOperation.setProperty("firstUser", "justNumber", justNumber);
         FilesOperation.setProperty("firstUser", "accountDigit", accountDigit);
-
-        createAccountPageObject.successCloseButton().click();
-        return this;
     }
 }
