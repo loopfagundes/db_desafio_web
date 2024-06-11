@@ -15,8 +15,17 @@ public class ValidationStep {
 
     public ValidationStep firstUserAccountPage() {
         Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá User_1,");
-        System.out.println(accountScreenPageObject.balanceUserLabel().getText());
         Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), "Saldo em conta R$ 1.000,00");
+        return this;
+    }
+
+    public ValidationStep transferCompletedSuccessfully() {
+        Assert.assertEquals(accountScreenPageObject.transferSuccessfullyLabel().getText(),"Transferencia realizada com sucesso");
+        return this;
+    }
+
+    public ValidationStep remainingBalance() {
+        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), "Saldo em conta R$ 500,00");
         return this;
     }
 }

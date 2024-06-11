@@ -33,7 +33,7 @@ public class RegisterSecondUserAccountStep {
         JsExecutor.click(driver, createAccountPageObject.balanceAccountButton());
         createAccountPageObject.registerAccountButton().click();
         RecorderSet.recordNumbersSecondUser(createAccountPageObject.accountNumberLabel());
-        System.out.println("\nSEGUNDO USUARIO: " + createAccountPageObject.accountNumberLabel().getText());
+        System.out.println("SEGUNDO USUARIO: " + createAccountPageObject.accountNumberLabel().getText());
         createAccountPageObject.successCloseButton().click();
         return this;
     }
