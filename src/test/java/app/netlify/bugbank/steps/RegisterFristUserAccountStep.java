@@ -6,10 +6,11 @@ import app.netlify.bugbank.utils.Action;
 import app.netlify.bugbank.utils.JsExecutor;
 import app.netlify.bugbank.utils.Report;
 import com.aventstack.extentreports.Status;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
+
+import static app.netlify.bugbank.utils.JsExecutor.*;
 
 public class RegisterFristUserAccountStep {
     private final WebDriver driver;
@@ -36,20 +37,10 @@ public class RegisterFristUserAccountStep {
         createAccountPageObject.nameUserTextField().sendKeys(userFirst);
         createAccountPageObject.registerPasswordTextField().sendKeys(passwordUserFirst);
         createAccountPageObject.confirmationPasswordTextField().sendKeys(passwordUserFirst);
-
-        if (createAccountPageObject.balanceAccountButton().isDisplayed()) {
-            createAccountPageObject.balanceAccountButton().click();
-            Report.log(Status.PASS, "A botao recebeu um cilque.");
-        } else if(!createAccountPageObject.balanceAccountButton().isSelected()) {
-            createAccountPageObject.balanceAccountButton().click();
-            action.actions(createAccountPageObject.balanceAccountButton());
-            Report.log(Status.PASS, "Metodo de Actions: A botao recebeu um cilque");
-        } else {
-            JsExecutor.highlight(driver, createAccountPageObject.balanceAccountButton());
-            Report.logCapture(Status.FAIL, "O botao nao recebeu um cilque");
-        }
+        JsExecutor.click(driver, createAccountPageObject.balanceAccountButton());
         createAccountPageObject.registerAccountButton().click();
         RecorderSet.recordNumbersFirstUser(createAccountPageObject.accountNumberLabel());
+        System.out.println("PRIMEIRO USUARIO: " + createAccountPageObject.accountNumberLabel().getText());
         createAccountPageObject.successCloseButton().click();
         return this;
     }

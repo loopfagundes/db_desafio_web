@@ -20,6 +20,7 @@ public class ValidationStep {
 
     public ValidationStep balanceUser() {
         System.out.println(accountScreenPageObject.balanceUserLabel().getText());
+        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), "Saldo em conta R$ 1.000,00");
         return this;
     }
 }

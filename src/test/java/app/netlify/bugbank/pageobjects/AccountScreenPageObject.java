@@ -33,4 +33,8 @@ public class AccountScreenPageObject {
     public WebElement balanceUserLabel() {
         return wait.visibilityOf(By.id("textBalance"));
     }
+
+    public WebElement exitAccountButton() {
+        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[1]/div"));
+    }
 }

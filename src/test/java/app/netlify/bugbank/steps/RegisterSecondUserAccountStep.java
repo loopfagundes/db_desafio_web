@@ -33,19 +33,10 @@ public class RegisterSecondUserAccountStep {
         createAccountPageObject.nameUserTextField().sendKeys(userSecond);
         createAccountPageObject.registerPasswordTextField().sendKeys(passwordUserSecond);
         createAccountPageObject.confirmationPasswordTextField().sendKeys(passwordUserSecond);
-        if (createAccountPageObject.balanceAccountButton().isDisplayed()) {
-            createAccountPageObject.balanceAccountButton().click();
-            Report.log(Status.PASS, "A botao recebeu um cilque.");
-        } else if(!createAccountPageObject.balanceAccountButton().isSelected()) {
-            createAccountPageObject.balanceAccountButton().click();
-            action.actions(createAccountPageObject.balanceAccountButton());
-            Report.log(Status.PASS, "Metodo de Actions: A botao recebeu um cilque");
-        } else {
-            JsExecutor.highlight(driver, createAccountPageObject.balanceAccountButton());
-            Report.logCapture(Status.FAIL, "O botao nao recebeu um cilque");
-        }
+        JsExecutor.click(driver, createAccountPageObject.balanceAccountButton());
         createAccountPageObject.registerAccountButton().click();
         RecorderSet.recordNumbersSecondUser(createAccountPageObject.accountNumberLabel());
+        System.out.println("\nSEGUNDO USUARIO: " + createAccountPageObject.accountNumberLabel().getText());
         createAccountPageObject.successCloseButton().click();
         return this;
     }

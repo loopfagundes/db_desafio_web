@@ -29,6 +29,7 @@ public class AccountScreenStep {
         accountScreenPageObject.accessAccountButton().click();
         validation.helloUserValidation();
         validation.balanceUser();
+        accountScreenPageObject.exitAccountButton().click();
         return this;
     }
 }

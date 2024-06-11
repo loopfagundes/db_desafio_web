@@ -28,16 +28,15 @@ public class BugBankTestCase extends BaseTest {
                 Property.get("userFirst"),
                 Property.get("passwordUserFirst")
         );
+        account.userAccount(
+                Property.get("emailFirst"),
+                Property.get("passwordUserFirst")
+        );
         driver.navigate().refresh();
         secondUser.indexPage(
                 Property.get("emailSecond"),
                 Property.get("userSecond"),
                 Property.get("passwordUserSecond")
-        );
-
-        account.userAccount(
-                Property.get("emailFirst"),
-                Property.get("passwordUserFirst")
         );
     }
 

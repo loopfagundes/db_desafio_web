@@ -10,4 +10,9 @@ public class JsExecutor {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("arguments[0].setAttribute('style', 'background: white; border: 2px solid red;');", element);
     }
+
+    public static void click(WebDriver driver, WebElement element) {
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("arguments[0].click();", element);
+    }
 }
