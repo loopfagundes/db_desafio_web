@@ -2,7 +2,6 @@ package app.netlify.bugbank.steps;
 
 import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
 import app.netlify.bugbank.supports.RecorderSet;
-import app.netlify.bugbank.utils.Action;
 import app.netlify.bugbank.utils.JsExecutor;
 import app.netlify.bugbank.utils.Report;
 import com.aventstack.extentreports.Status;
@@ -13,12 +12,10 @@ import java.io.IOException;
 public class RegisterSecondUserAccountStep {
     private final WebDriver driver;
     private final CreateAccountPageObject createAccountPageObject;
-    private final Action action;
 
     public RegisterSecondUserAccountStep(WebDriver _driver) {
         driver = _driver;
         createAccountPageObject = new CreateAccountPageObject(_driver);
-        action = new Action(_driver);
     }
 
     public RegisterSecondUserAccountStep indexPage(String secondEmail, String userSecond, String passwordUserSecond) throws IOException {

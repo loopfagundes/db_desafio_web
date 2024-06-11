@@ -28,7 +28,7 @@ public class BugBankTestCase extends BaseTest {
                 Property.get("userFirst"),
                 Property.get("passwordUserFirst")
         );
-        account.userAccount(
+        account.userAccountFirst(
                 Property.get("emailFirst"),
                 Property.get("passwordUserFirst")
         );
@@ -39,5 +39,4 @@ public class BugBankTestCase extends BaseTest {
                 Property.get("passwordUserSecond")
         );
     }
-
 }

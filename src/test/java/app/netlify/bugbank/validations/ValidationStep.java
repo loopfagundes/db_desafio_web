@@ -13,12 +13,8 @@ public class ValidationStep {
         accountScreenPageObject = new AccountScreenPageObject(_driver);
     }
 
-    public ValidationStep helloUserValidation() {
-        Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá Paulo,");
-        return this;
-    }
-
-    public ValidationStep balanceUser() {
+    public ValidationStep firstUserAccountPage() {
+        Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá User_1,");
         System.out.println(accountScreenPageObject.balanceUserLabel().getText());
         Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), "Saldo em conta R$ 1.000,00");
         return this;

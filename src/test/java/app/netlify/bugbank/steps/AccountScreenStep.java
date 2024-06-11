@@ -17,7 +17,7 @@ public class AccountScreenStep {
         validation = new ValidationStep(_driver);
     }
 
-    public AccountScreenStep userAccount(String emailFirst, String passwordUserFirst) {
+    public AccountScreenStep userAccountFirst(String emailFirst, String passwordUserFirst) {
         login(emailFirst, passwordUserFirst);
         return this;
     }
@@ -27,8 +27,7 @@ public class AccountScreenStep {
         accountScreenPageObject.emailTextField().sendKeys(emailFirst);
         accountScreenPageObject.passwordTextField().sendKeys(passwordUserFirst);
         accountScreenPageObject.accessAccountButton().click();
-        validation.helloUserValidation();
-        validation.balanceUser();
+        validation.firstUserAccountPage();
         accountScreenPageObject.exitAccountButton().click();
         return this;
     }
