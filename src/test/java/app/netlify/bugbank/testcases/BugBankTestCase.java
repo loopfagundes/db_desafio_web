@@ -1,5 +1,6 @@
 package app.netlify.bugbank.testcases;
 
+import app.netlify.bugbank.steps.AccountScreenStep;
 import app.netlify.bugbank.steps.RegisterFristUserAccountStep;
 import app.netlify.bugbank.steps.RegisterSecondUserAccountStep;
 import app.netlify.bugbank.utils.BaseTest;
@@ -21,6 +22,7 @@ public class BugBankTestCase extends BaseTest {
         driver.get(Property.get("url"));
         RegisterFristUserAccountStep firstUser = new RegisterFristUserAccountStep(driver);
         RegisterSecondUserAccountStep secondUser = new RegisterSecondUserAccountStep(driver);
+        AccountScreenStep account = new AccountScreenStep(driver);
         firstUser.indexPage(
                 Property.get("emailFirst"),
                 Property.get("userFirst"),
@@ -32,5 +34,11 @@ public class BugBankTestCase extends BaseTest {
                 Property.get("userSecond"),
                 Property.get("passwordUserSecond")
         );
+
+        account.userAccount(
+                Property.get("emailFirst"),
+                Property.get("passwordUserFirst")
+        );
     }
+
 }

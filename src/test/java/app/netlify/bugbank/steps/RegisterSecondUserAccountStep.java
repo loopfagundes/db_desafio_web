@@ -3,6 +3,7 @@ package app.netlify.bugbank.steps;
 import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
 import app.netlify.bugbank.supports.RecorderSet;
 import app.netlify.bugbank.utils.Action;
+import app.netlify.bugbank.utils.JsExecutor;
 import app.netlify.bugbank.utils.Report;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
@@ -10,10 +11,12 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 
 public class RegisterSecondUserAccountStep {
+    private final WebDriver driver;
     private final CreateAccountPageObject createAccountPageObject;
     private final Action action;
 
     public RegisterSecondUserAccountStep(WebDriver _driver) {
+        driver = _driver;
         createAccountPageObject = new CreateAccountPageObject(_driver);
         action = new Action(_driver);
     }
@@ -33,9 +36,13 @@ public class RegisterSecondUserAccountStep {
         if (createAccountPageObject.balanceAccountButton().isDisplayed()) {
             createAccountPageObject.balanceAccountButton().click();
             Report.log(Status.PASS, "A botao recebeu um cilque.");
-        } else {
+        } else if(!createAccountPageObject.balanceAccountButton().isSelected()) {
+            createAccountPageObject.balanceAccountButton().click();
             action.actions(createAccountPageObject.balanceAccountButton());
             Report.log(Status.PASS, "Metodo de Actions: A botao recebeu um cilque");
+        } else {
+            JsExecutor.highlight(driver, createAccountPageObject.balanceAccountButton());
+            Report.logCapture(Status.FAIL, "O botao nao recebeu um cilque");
         }
         createAccountPageObject.registerAccountButton().click();
         RecorderSet.recordNumbersSecondUser(createAccountPageObject.accountNumberLabel());
