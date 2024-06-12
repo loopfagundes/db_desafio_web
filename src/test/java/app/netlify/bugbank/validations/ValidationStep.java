@@ -28,4 +28,21 @@ public class ValidationStep {
         Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), "Saldo em conta R$ 500,00");
         return this;
     }
+
+    public ValidationStep secondUserAccountPage() {
+        Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá User_2,");
+        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), "Saldo em conta R$ 1.500,00");
+        return this;
+    }
+
+    public ValidationStep accountMovement() {
+        Assert.assertEquals(accountScreenPageObject.balanceAvailableLabel().getText(), "R$ 1.500,00");
+
+
+        // ****AQUI OS ELEMENTOS TEM DOIS IGUAIS.****
+        //PRECISO QUE VALIDAR VALOR 500$
+        System.out.println(accountScreenPageObject.receiveValueLabel().getText());
+        //IMPRIMIR: VALOR 1K
+        return this;
+    }
 }

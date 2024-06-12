@@ -27,6 +27,12 @@ public class AccountScreenStep {
         return this;
     }
 
+    public AccountScreenStep userAccountSecond(String emailSecond, String passwordUserSecond) {
+        loginSecondUser(emailSecond, passwordUserSecond);
+        accountMovementPage();
+        return this;
+    }
+
     private AccountScreenStep login(String emailFirst, String passwordUserFirst) {
         Report.log(Status.INFO, "Acessar a conta primeiro do usuario");
         accountScreenPageObject.emailTextField().sendKeys(emailFirst);
@@ -57,8 +63,19 @@ public class AccountScreenStep {
         return this;
     }
 
-    private AccountScreenStep loginSecondUser() {
+    private AccountScreenStep loginSecondUser(String emailSecond, String passwordUserSecond) {
         Report.log(Status.INFO, "O segundo do usuario acessar na conta.");
+        accountScreenPageObject.emailTextField().sendKeys(emailSecond);
+        accountScreenPageObject.passwordTextField().sendKeys(passwordUserSecond);
+        accountScreenPageObject.accessAccountButton().click();
+        validation.secondUserAccountPage();
+        return this;
+    }
+
+    private AccountScreenStep accountMovementPage() {
+        accountScreenPageObject.balanceStatementButton().click();
+
+        validation.accountMovement();
         return this;
     }
 }
