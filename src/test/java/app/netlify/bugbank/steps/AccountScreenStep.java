@@ -73,9 +73,15 @@ public class AccountScreenStep {
     }
 
     private AccountScreenStep accountMovementPage() {
+        Report.log(Status.INFO, "Movimento do bancario do usuario");
         accountScreenPageObject.balanceStatementButton().click();
-
         validation.accountMovement();
+        if (!accountScreenPageObject.exitAccountButton().isSelected()) {
+            accountScreenPageObject.exitAccountButton().click();
+            Report.log(Status.PASS, "O segundo usuario saiu da conta com sucesso.");
+        } else {
+            Report.logCapture(Status.FAIL, "Não saiu da conta.");
+        }
         return this;
     }
 }

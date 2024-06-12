@@ -83,6 +83,6 @@ public class AccountScreenPageObject {
     }
 
     public WebElement receiveValueLabel() {
-        return wait.visibilityOf(By.id("textTransferValue"));
+        return wait.visibilityOf(By.xpath("//*[@type=\"input\"][@id=\"textTransferValue\"]"));
     }
 }

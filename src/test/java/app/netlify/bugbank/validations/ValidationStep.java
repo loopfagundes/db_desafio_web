@@ -37,12 +37,7 @@ public class ValidationStep {
 
     public ValidationStep accountMovement() {
         Assert.assertEquals(accountScreenPageObject.balanceAvailableLabel().getText(), "R$ 1.500,00");
-
-
-        // ****AQUI OS ELEMENTOS TEM DOIS IGUAIS.****
-        //PRECISO QUE VALIDAR VALOR 500$
-        System.out.println(accountScreenPageObject.receiveValueLabel().getText());
-        //IMPRIMIR: VALOR 1K
+        Assert.assertEquals(accountScreenPageObject.receiveValueLabel().getText(), "R$ 500,00");
         return this;
     }
 }
