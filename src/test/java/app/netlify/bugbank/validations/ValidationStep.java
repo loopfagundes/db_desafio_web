@@ -1,16 +1,31 @@
 package app.netlify.bugbank.validations;
 
 import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
+import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
+import app.netlify.bugbank.supports.RecorderSet;
+import app.netlify.bugbank.utils.Report;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class ValidationStep {
     private final WebDriver driver;
+    private final CreateAccountPageObject createAccountPageObject;
     private final AccountScreenPageObject accountScreenPageObject;
 
     public ValidationStep(WebDriver _driver) {
         driver = _driver;
+        createAccountPageObject = new CreateAccountPageObject(_driver);
         accountScreenPageObject = new AccountScreenPageObject(_driver);
+    }
+
+    public ValidationStep createAccountSuccess () {
+        if (RecorderSet.recordTest(createAccountPageObject.createdSuccessfullyModalLabel()).equals("A conta  foi criada com sucesso")) {
+            Report.log(Status.PASS, "O usuario foi criada com sucesso");
+        } else {
+            Report.logCapture(Status.FAIL, "Nao foi criada sem sucesso.");
+        }
+        return this;
     }
 
     public ValidationStep firstUserAccountPage() {

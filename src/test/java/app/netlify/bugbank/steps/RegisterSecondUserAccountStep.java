@@ -4,6 +4,7 @@ import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
 import app.netlify.bugbank.supports.RecorderSet;
 import app.netlify.bugbank.utils.JsExecutor;
 import app.netlify.bugbank.utils.Report;
+import app.netlify.bugbank.validations.ValidationStep;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 
@@ -12,10 +13,12 @@ import java.io.IOException;
 public class RegisterSecondUserAccountStep {
     private final WebDriver driver;
     private final CreateAccountPageObject createAccountPageObject;
+    private final ValidationStep validationStep;
 
     public RegisterSecondUserAccountStep(WebDriver _driver) {
         driver = _driver;
         createAccountPageObject = new CreateAccountPageObject(_driver);
+        validationStep = new ValidationStep(_driver);
     }
 
     public RegisterSecondUserAccountStep indexPage(String secondEmail, String userSecond, String passwordUserSecond) throws IOException {
@@ -32,8 +35,8 @@ public class RegisterSecondUserAccountStep {
         createAccountPageObject.confirmationPasswordTextField().sendKeys(passwordUserSecond);
         JsExecutor.click(driver, createAccountPageObject.balanceAccountButton());
         createAccountPageObject.registerAccountButton().click();
-        RecorderSet.recordNumbersSecondUser(createAccountPageObject.accountNumberLabel());
-        System.out.println("SEGUNDO USUARIO: " + createAccountPageObject.accountNumberLabel().getText());
+        RecorderSet.recordNumbersSecondUser(createAccountPageObject.createdSuccessfullyModalLabel());
+        validationStep.createAccountSuccess();
         createAccountPageObject.successCloseButton().click();
         return this;
     }

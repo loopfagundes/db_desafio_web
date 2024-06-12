@@ -24,4 +24,14 @@ public class RecorderSet {
         FilesOperation.setProperty("secondUser", "justNumber", justNumber);
         FilesOperation.setProperty("secondUser", "accountDigit", accountDigit);
     }
+
+    public static String recordTest(WebElement element) {
+        return getString(element);
+    }
+
+    private static String getString(WebElement element) {
+        String allSentences = element.getText();
+        String ignoreNumbers = allSentences.replaceAll("[0-9-]", "");
+        return ignoreNumbers;
+    }
 }
