@@ -19,8 +19,11 @@ _O projeto é exclusivamente para [DBServer](https://db.tec.br/)_
 
 #### Dependencias:
 :pushpin: [TestNG](https://mvnrepository.com/artifact/org.testng/testng/7.10.2),  
+
 :pushpin: [Selenium Java](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java/4.21.0),  
+
 :pushpin: [WebDriverManager](https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager/5.8.0),
+
 :pushpin: [Extent Reports TestNG Adapter](https://mvnrepository.com/artifact/com.aventstack/extentreports-testng-adapter/1.0.3)
 
 #### Baixando o projeto:
