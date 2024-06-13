@@ -37,7 +37,7 @@ public class RegisterSecondUserAccountStep {
         createAccountPageObject.registerAccountButton().click();
         RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(), "secondUser", "justNumber", "accountDigit");
         validationStep.createAccountSuccess();
-        createAccountPageObject.successCloseButton().click();
+        createAccountPageObject.successCloseModalButton().click();
         return this;
     }
 }

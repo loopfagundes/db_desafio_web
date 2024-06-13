@@ -42,7 +42,7 @@ public class CreateAccountPageObject {
         return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button"));
     }
 
-    public WebElement successCloseButton() {
+    public WebElement successCloseModalButton() {
         return wait.toBeClickable(By.id("btnCloseModal"));
     }
 

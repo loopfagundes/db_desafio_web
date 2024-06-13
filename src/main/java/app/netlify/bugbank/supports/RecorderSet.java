@@ -16,13 +16,12 @@ public class RecorderSet {
         FilesOperation.setProperty(nameProp, digit, accountDigit);
     }
 
-    public static String getString(WebElement element) {
+    public static String justSentences(WebElement element) {
         return toReplaceAll(element);
     }
 
     private static String toReplaceAll(WebElement element) {
-        String allSentences = element.getText();
-        String ignoreNumbers = allSentences.replaceAll("[0-9-]", "");
-        return ignoreNumbers;
+        String ignoreNumbers = element.getText();
+        return ignoreNumbers.replaceAll("[0-9-]", "");
     }
 }

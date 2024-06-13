@@ -37,7 +37,7 @@ public class RegisterFristUserAccountStep {
         createAccountPageObject.registerAccountButton().click();
         RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(), "firstUser", "justNumber", "accountDigit");
         validationStep.createAccountSuccess();
-        createAccountPageObject.successCloseButton().click();
+        createAccountPageObject.successCloseModalButton().click();
         return this;
     }
 }
