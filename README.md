@@ -1,8 +1,6 @@
 ﻿
 ## Desafio Tecnico DBServer
 
----
-
 ## [Bug Bank](https://bugbank.netlify.app/)
 
 >O banco com bugs e falhas do seu jeito.
