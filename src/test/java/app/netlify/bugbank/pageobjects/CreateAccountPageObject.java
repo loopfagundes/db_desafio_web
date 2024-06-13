@@ -35,7 +35,7 @@ public class CreateAccountPageObject {
     }
 
     public WebElement balanceAccountButton() {
-        return driver.findElement(By.cssSelector("#toggleAddBalance"));
+        return driver.findElement(By.id("toggleAddBalance"));
     }
 
     public WebElement registerAccountButton() {
