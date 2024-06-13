@@ -20,7 +20,7 @@ public class ValidationStep {
     }
 
     public ValidationStep createAccountSuccess () {
-        if (RecorderSet.recordTest(createAccountPageObject.createdSuccessfullyModalLabel()).equals("A conta  foi criada com sucesso")) {
+        if (RecorderSet.getString(createAccountPageObject.createdSuccessfullyModalLabel()).equals("A conta  foi criada com sucesso")) {
             Report.log(Status.PASS, "O usuario foi criada com sucesso");
         } else {
             Report.logCapture(Status.FAIL, "Nao foi criada sem sucesso.");

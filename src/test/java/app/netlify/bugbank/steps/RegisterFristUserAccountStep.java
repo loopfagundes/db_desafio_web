@@ -35,7 +35,7 @@ public class RegisterFristUserAccountStep {
         createAccountPageObject.confirmationPasswordTextField().sendKeys(passwordUserFirst);
         JsExecutor.click(driver, createAccountPageObject.balanceAccountButton());
         createAccountPageObject.registerAccountButton().click();
-        RecorderSet.recordNumbersFirstUser(createAccountPageObject.createdSuccessfullyModalLabel());
+        RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(), "firstUser", "justNumber", "accountDigit");
         validationStep.createAccountSuccess();
         createAccountPageObject.successCloseButton().click();
         return this;

@@ -35,7 +35,7 @@ public class RegisterSecondUserAccountStep {
         createAccountPageObject.confirmationPasswordTextField().sendKeys(passwordUserSecond);
         JsExecutor.click(driver, createAccountPageObject.balanceAccountButton());
         createAccountPageObject.registerAccountButton().click();
-        RecorderSet.recordNumbersSecondUser(createAccountPageObject.createdSuccessfullyModalLabel());
+        RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(), "secondUser", "justNumber", "accountDigit");
         validationStep.createAccountSuccess();
         createAccountPageObject.successCloseButton().click();
         return this;
