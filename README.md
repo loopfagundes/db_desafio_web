@@ -49,8 +49,8 @@ src >
 	main > 
 		java > 
 			app.netlify.bugbank >
-				utils > 
-					BaseTest
+						utils > 
+							BaseTest
 					
 @BeforeMethod  
 DriverFactory.createInstance(BrowserEnum.CHROME);
