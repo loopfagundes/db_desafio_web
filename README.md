@@ -1,6 +1,8 @@
 ﻿
 ## Desafio Tecnico DBServer
 
+---
+
 ## [Bug Bank](https://bugbank.netlify.app/)
 
 >O banco com bugs e falhas do seu jeito.
@@ -9,7 +11,9 @@
 
 _O projeto é exclusivamente para [DBServer](https://db.tec.br/)_
 
-## Ferramentas que foi ulitizado?
+---
+
+### Ferramentas que foi ulitizado?
 
 #### Construido com a estrutura:
 
@@ -26,7 +30,9 @@ _O projeto é exclusivamente para [DBServer](https://db.tec.br/)_
 
 :pushpin: [Extent Reports TestNG Adapter](https://mvnrepository.com/artifact/com.aventstack/extentreports-testng-adapter/1.0.3)
 
-#### Baixando o projeto:
+---
+
+### Baixando o projeto:
 
 Para baixar o projeto, abrir o comando ou dentro IDE:
 ```bash
