@@ -1,13 +1,23 @@
 ﻿
 ## Desafio Tecnico DBServer
 
-## [Bug Bank](https://bugbank.netlify.app/)
+### [Bug Bank](https://bugbank.netlify.app/)
 
 >O banco com bugs e falhas do seu jeito.
 >
 > É um _Bug Bank_, para que? É pratique de testes e automação de testes.
 
-_O projeto é exclusivamente para [DBServer](https://db.tec.br/)_
+---
+
+O projeto é exclusivamente para [DBServer](https://db.tec.br/).
+
+- Realizar Transferência entre Contas
+   Passo –a –passo :
+
+1. Acessar o site [Bug Bank](https://bugbank.netlify.app/)
+2. Criar duas contas com Saldo e salvar os seus dados.
+3. Acessar uma conta e realizar uma transferência de valor para outra.
+4. Validar a saída e entrada de valores das contas envolvidas
 
 ---
 
