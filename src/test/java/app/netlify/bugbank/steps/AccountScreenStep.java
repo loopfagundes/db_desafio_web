@@ -45,8 +45,8 @@ public class AccountScreenStep {
     private AccountScreenStep makeTransfer(String value, String description) throws IOException {
         Report.log(Status.INFO, "Pagina da minha conta e realizar a transferência");
         accountScreenPageObject.transferButton().click();
-        accountScreenPageObject.justNumberAccountTextField().sendKeys(justNumber());
-        accountScreenPageObject.accountDigitTextField().sendKeys(accountDigit());
+        accountScreenPageObject.justNumberAccountTextField().sendKeys(justNumber("secondUser", "justNumber"));
+        accountScreenPageObject.accountDigitTextField().sendKeys(accountDigit("secondUser", "accountDigit"));
         accountScreenPageObject.transferAmountTextField().sendKeys(value);
         accountScreenPageObject.descriptionTextField().sendKeys(description);
         accountScreenPageObject.transferNowButton().click();
