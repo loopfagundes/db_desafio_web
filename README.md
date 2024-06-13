@@ -44,7 +44,7 @@ O projeto é exclusivamente para [DBServer](https://db.tec.br/).
 
 Para baixar o projeto, abrir o comando ou dentro IDE:
 ```bash
-  git clone https://github.com/loopfagundes/db_desafio_web.git
+git clone https://github.com/loopfagundes/db_desafio_web.git
 ```
 
 #### Como executar?
@@ -59,8 +59,8 @@ src >
 	main > 
 		java > 
 			app.netlify.bugbank >
-				utils > 
-					BaseTest
+						utils > 
+							BaseTest
 					
 @BeforeMethod  
 DriverFactory.createInstance(BrowserEnum.CHROME);
