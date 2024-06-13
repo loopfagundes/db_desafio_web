@@ -34,7 +34,7 @@ _O projeto é exclusivamente para [DBServer](https://db.tec.br/)_
 
 Para baixar o projeto, abrir o comando ou dentro IDE:
 ```bash
-  git clone https://github.com/loopfagundes/db_desafio_web.git
+git clone https://github.com/loopfagundes/db_desafio_web.git
 ```
 
 #### Como executar?
