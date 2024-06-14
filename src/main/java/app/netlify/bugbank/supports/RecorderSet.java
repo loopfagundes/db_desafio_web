@@ -1,6 +1,7 @@
 package app.netlify.bugbank.supports;
 
 import app.netlify.bugbank.utils.FilesOperation;
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
@@ -23,5 +24,19 @@ public class RecorderSet {
     private static String toReplaceAll(WebElement element) {
         String ignoreNumbers = element.getText();
         return ignoreNumbers.replaceAll("[0-9-]", "");
+    }
+
+    public static void fakeValue(WebElement element, String nameProp, String key) throws IOException {
+        String fakeCash = Faker.instance().number().digits(Integer.parseInt("3"));
+        String fakeCent = Faker.instance().number().digits(Integer.parseInt("2"));
+        String fakeValue = fakeCash + "." + fakeCent;
+        element.sendKeys(fakeValue);
+        FilesOperation.setProperty(nameProp, key, fakeValue);
+    }
+
+    public static String cash(WebElement element, String nameProp, String key) throws IOException {
+        String value = element.getText();
+        FilesOperation.setProperty(nameProp, key, value);
+        return value;
     }
 }

@@ -1,6 +1,7 @@
 package app.netlify.bugbank.steps;
 
 import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
+import app.netlify.bugbank.supports.RecorderSet;
 import app.netlify.bugbank.utils.Report;
 import app.netlify.bugbank.validations.ValidationStep;
 import com.aventstack.extentreports.Status;
@@ -21,13 +22,13 @@ public class AccountScreenStep {
         validation = new ValidationStep(_driver);
     }
 
-    public AccountScreenStep userAccountFirst(String emailFirst, String passwordUserFirst, String value, String description) throws IOException {
+    public AccountScreenStep userAccountFirst(String emailFirst, String passwordUserFirst, String description) throws IOException {
         login(emailFirst, passwordUserFirst);
-        makeTransfer(value, description);
+        makeTransfer(description);
         return this;
     }
 
-    public AccountScreenStep userAccountSecond(String emailSecond, String passwordUserSecond) {
+    public AccountScreenStep userAccountSecond(String emailSecond, String passwordUserSecond) throws IOException {
         loginSecondUser(emailSecond, passwordUserSecond);
         accountMovementPage();
         return this;
@@ -42,12 +43,12 @@ public class AccountScreenStep {
         return this;
     }
 
-    private AccountScreenStep makeTransfer(String value, String description) throws IOException {
+    private AccountScreenStep makeTransfer(String description) throws IOException {
         Report.log(Status.INFO, "Pagina da minha conta e realizar a transferência");
         accountScreenPageObject.transferButton().click();
         accountScreenPageObject.justNumberAccountTextField().sendKeys(justNumber("secondUser", "justNumber"));
         accountScreenPageObject.accountDigitTextField().sendKeys(accountDigit("secondUser", "accountDigit"));
-        accountScreenPageObject.transferAmountTextField().sendKeys(value);
+        RecorderSet.fakeValue(accountScreenPageObject.transferAmountTextField(), "firstUser", "value");
         accountScreenPageObject.descriptionTextField().sendKeys(description);
         accountScreenPageObject.transferNowButton().click();
         validation.transferCompletedSuccessfully();
@@ -63,7 +64,7 @@ public class AccountScreenStep {
         return this;
     }
 
-    private AccountScreenStep loginSecondUser(String emailSecond, String passwordUserSecond) {
+    private AccountScreenStep loginSecondUser(String emailSecond, String passwordUserSecond) throws IOException {
         Report.log(Status.INFO, "O segundo do usuario acessar na conta.");
         accountScreenPageObject.emailTextField().sendKeys(emailSecond);
         accountScreenPageObject.passwordTextField().sendKeys(passwordUserSecond);
@@ -72,7 +73,7 @@ public class AccountScreenStep {
         return this;
     }
 
-    private AccountScreenStep accountMovementPage() {
+    private AccountScreenStep accountMovementPage() throws IOException {
         Report.log(Status.INFO, "Movimento do bancario do usuario");
         accountScreenPageObject.balanceStatementButton().click();
         validation.accountMovement();

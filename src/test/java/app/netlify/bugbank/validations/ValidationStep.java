@@ -8,6 +8,8 @@ import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.io.IOException;
+
 public class ValidationStep {
     private final WebDriver driver;
     private final CreateAccountPageObject createAccountPageObject;
@@ -39,20 +41,20 @@ public class ValidationStep {
         return this;
     }
 
-    public ValidationStep remainingBalance() {
-        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), "Saldo em conta R$ 500,00");
+    public ValidationStep remainingBalance() throws IOException {
+        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "firstUser", "cashBalance"));
         return this;
     }
 
-    public ValidationStep secondUserAccountPage() {
+    public ValidationStep secondUserAccountPage() throws IOException {
         Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá User_2,");
-        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), "Saldo em conta R$ 1.500,00");
+        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "secondUser", "cashBalance"));
         return this;
     }
 
-    public ValidationStep accountMovement() {
-        Assert.assertEquals(accountScreenPageObject.balanceAvailableLabel().getText(), "R$ 1.500,00");
-        Assert.assertEquals(accountScreenPageObject.receiveValueLabel().getText(), "R$ 500,00");
+    public ValidationStep accountMovement() throws IOException {
+        Assert.assertEquals(accountScreenPageObject.balanceAvailableLabel().getText(), RecorderSet.cash(accountScreenPageObject.balanceAvailableLabel(), "secondUser", "balanceAvailable"));
+        Assert.assertEquals(accountScreenPageObject.receiveValueLabel().getText(), RecorderSet.cash(accountScreenPageObject.receiveValueLabel(), "secondUser", "receiveCash"));
         return this;
     }
 }
