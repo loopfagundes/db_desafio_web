@@ -1,11 +1,11 @@
-﻿
+
 ## Desafio Tecnico DBServer
 
 ### [Bug Bank](https://bugbank.netlify.app/)
 
->O banco com bugs e falhas do seu jeito.
+>*O banco com bugs e falhas do seu jeito.*
 >
-> É um _Bug Bank_, para que? É pratique de testes e automação de testes.
+>*É um Bug Bank, para que? É pratique de testes e automação de testes.*
 
 ---
 
