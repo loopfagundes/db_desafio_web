@@ -14,10 +14,10 @@ O projeto é exclusivamente para [DBServer](https://db.tec.br/).
 - Realizar Transferência entre Contas
    Passo –a –passo :
 
-1. Acessar o site [Bug Bank](https://bugbank.netlify.app/)
-2. Criar duas contas com Saldo e salvar os seus dados.
-3. Acessar uma conta e realizar uma transferência de valor para outra.
-4. Validar a saída e entrada de valores das contas envolvidas
+:heavy_check_mark: Acessar o site [Bug Bank](https://bugbank.netlify.app/)
+:heavy_check_mark: Criar duas contas com Saldo e salvar os seus dados.
+:heavy_check_mark: Acessar uma conta e realizar uma transferência de valor para outra.
+:heavy_check_mark: Validar a saída e entrada de valores das contas envolvidas
 
 ---
 
