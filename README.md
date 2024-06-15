@@ -9,10 +9,11 @@
 
 ---
 
-O projeto é exclusivamente para [DBServer](https://db.tec.br/).
+#### O projeto é exclusivamente para [DBServer](https://db.tec.br/).
 
-:clipboard: Realizar Transferência entre Contas
-   Passo –a –passo :
+---
+
+:clipboard: Realizar Transferência entre Contas Passo –a –passo :
 
 :heavy_check_mark: Acessar o site [Bug Bank](https://bugbank.netlify.app/)
 
