@@ -41,6 +41,8 @@ O projeto é exclusivamente para [DBServer](https://db.tec.br/).
 
 :pushpin: [Extent Reports TestNG Adapter](https://mvnrepository.com/artifact/com.aventstack/extentreports-testng-adapter/1.0.3)
 
+:pushpin: [Java Faker](https://mvnrepository.com/artifact/com.github.javafaker/javafaker/1.0.2)
+
 ---
 
 ### Baixando o projeto:
