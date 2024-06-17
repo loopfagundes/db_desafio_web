@@ -59,7 +59,7 @@ public class AccountScreenPageObject {
     }
 
     public WebElement transferSuccessfullyLabel() {
-        return wait.toBeClickable(By.id("modalText"));
+        return wait.visibilityOf(By.id("modalText"));
     }
 
     public WebElement closeModalButton() {
@@ -72,5 +72,17 @@ public class AccountScreenPageObject {
 
     public WebElement exitAccountButton() {
         return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[1]/div"));
+    }
+
+    public WebElement balanceStatementButton() {
+        return wait.toBeClickable(By.id("btn-EXTRATO"));
+    }
+
+    public WebElement balanceAvailableLabel() {
+        return wait.visibilityOf(By.id("textBalanceAvailable"));
+    }
+
+    public WebElement receiveValueLabel() {
+        return wait.visibilityOf(By.xpath("//*[@type=\"input\"][@id=\"textTransferValue\"]"));
     }
 }

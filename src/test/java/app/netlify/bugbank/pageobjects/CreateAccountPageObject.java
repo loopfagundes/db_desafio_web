@@ -35,18 +35,18 @@ public class CreateAccountPageObject {
     }
 
     public WebElement balanceAccountButton() {
-        return driver.findElement(By.cssSelector("#toggleAddBalance"));
+        return driver.findElement(By.id("toggleAddBalance"));
     }
 
     public WebElement registerAccountButton() {
         return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button"));
     }
 
-    public WebElement successCloseButton() {
+    public WebElement successCloseModalButton() {
         return wait.toBeClickable(By.id("btnCloseModal"));
     }
 
-    public WebElement accountNumberLabel() {
+    public WebElement createdSuccessfullyModalLabel() {
         return wait.visibilityOf(By.id("modalText"));
     }
 }
