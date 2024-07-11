@@ -25,16 +25,16 @@ public class DriverFactory {
                     return new EdgeDriver();
                 default:
                     String message = "DriverFactory.getInstance() recebeu um argumento invalido";
-                    ExtentTestManager.getTest().log(Status.FATAL, message);
+                    ExtentTestManager.getTest().log(Status.FAIL, message);
                     throw new IllegalArgumentException(message);
             }
         } catch (SessionNotCreatedException e) {
             String message = "Sessao dao criada, versao do driver nao suportada.";
-            ExtentTestManager.getTest().log(Status.FATAL, message);
+            ExtentTestManager.getTest().log(Status.FAIL, message);
             throw new SessionNotCreatedException(message, e);
         } catch (WebDriverException e) {
             String message = "Nao foi possivel encontrar o binario do driver.";
-            ExtentTestManager.getTest().log(Status.FATAL, message);
+            ExtentTestManager.getTest().log(Status.FAIL, message);
             throw new WebDriverException(message, e);
         }
     }
