@@ -22,7 +22,7 @@ public class ValidationStep {
     }
 
     public ValidationStep createAccountSuccess () {
-        if (RecorderSet.justSentences(createAccountPageObject.createdSuccessfullyModalLabel()).equals("A conta  foi criada com sucesso")) {
+        if (RecorderSet.toReplaceAll(createAccountPageObject.createdSuccessfullyModalLabel()).equals("A conta  foi criada com sucesso")) {
             Report.log(Status.PASS, "O usuario foi criada com sucesso");
         } else {
             Report.logCapture(Status.FAIL, "Nao foi criada sem sucesso.");
@@ -42,19 +42,23 @@ public class ValidationStep {
     }
 
     public ValidationStep remainingBalance() throws IOException {
-        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "firstUser", "cashBalance"));
+        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(),
+                RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "firstUser", "cashBalance"));
         return this;
     }
 
     public ValidationStep secondUserAccountPage() throws IOException {
         Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá User_2,");
-        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "secondUser", "cashBalance"));
+        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(),
+                RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "secondUser", "cashBalance"));
         return this;
     }
 
     public ValidationStep accountMovement() throws IOException {
-        Assert.assertEquals(accountScreenPageObject.balanceAvailableLabel().getText(), RecorderSet.cash(accountScreenPageObject.balanceAvailableLabel(), "secondUser", "balanceAvailable"));
-        Assert.assertEquals(accountScreenPageObject.receiveValueLabel().getText(), RecorderSet.cash(accountScreenPageObject.receiveValueLabel(), "secondUser", "receiveCash"));
+        Assert.assertEquals(accountScreenPageObject.balanceAvailableLabel().getText(),
+                RecorderSet.cash(accountScreenPageObject.balanceAvailableLabel(), "secondUser", "balanceAvailable"));
+        Assert.assertEquals(accountScreenPageObject.receiveValueLabel().getText(),
+                RecorderSet.cash(accountScreenPageObject.receiveValueLabel(), "secondUser", "receiveCash"));
         return this;
     }
 }

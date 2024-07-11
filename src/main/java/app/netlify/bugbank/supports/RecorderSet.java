@@ -17,11 +17,7 @@ public class RecorderSet {
         FilesOperation.setProperty(nameProp, digit, accountDigit);
     }
 
-    public static String justSentences(WebElement element) {
-        return toReplaceAll(element);
-    }
-
-    private static String toReplaceAll(WebElement element) {
+    public static String toReplaceAll(WebElement element) {
         String ignoreNumbers = element.getText();
         return ignoreNumbers.replaceAll("[0-9-]", "");
     }
