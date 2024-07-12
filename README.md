@@ -60,10 +60,10 @@ mvn test
 ```
 Padrão do browser Chrome.
 Para executar no Firefox ou Edge,  caminho para acessar de pastas dentro IDE:
-```java
+```
 src/main/java/app.netlify.bugbank/utils/BaseTest
 ```
-```
+```java
 @BeforeMethod  
 DriverFactory.createInstance(BrowserEnum.CHROME);
 ```
