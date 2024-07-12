@@ -2,6 +2,7 @@ package app.netlify.bugbank.steps;
 
 import app.netlify.bugbank.data.DataObjectUser;
 import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
+import app.netlify.bugbank.pageobjects.TransferPageObject;
 import app.netlify.bugbank.supports.RecorderSet;
 import app.netlify.bugbank.utils.Report;
 import app.netlify.bugbank.validations.Validation;
@@ -14,10 +15,12 @@ import static app.netlify.bugbank.supports.RecorderGet.getDataUser;
 
 public class TransferStep {
     private final AccountScreenPageObject accountScreenPageObject;
+    private final TransferPageObject transferPageObject;
     private final Validation validation;
 
     public TransferStep(WebDriver driver) {
         accountScreenPageObject = new AccountScreenPageObject(driver);
+        transferPageObject = new TransferPageObject(driver);
         validation = new Validation(driver);
     }
 
@@ -37,14 +40,9 @@ public class TransferStep {
 
     private void transferBankBalance() throws IOException {
         Report.log(Status.INFO, "Pagina da minha conta e realizar a transferência");
-        accountScreenPageObject.transferButton().click();
-        accountScreenPageObject.numberAccountTextField().sendKeys(getDataUser("2_user", "accountNumber"));
-        accountScreenPageObject.digitTextField().sendKeys(getDataUser("2_user", "digit"));
-        RecorderSet.fakeValue(accountScreenPageObject.transferAmountTextField(), "1_user", "value");
-        accountScreenPageObject.descriptionTextField().sendKeys(getDataUser("1_user", "description"));
-        accountScreenPageObject.transferNowButton().click();
-        validation.transferCompletedSuccessfully();
-        accountScreenPageObject.closeModalButton().click();
+        transferPageObject.transferButton().click();
+        fillInTransferFields();
+        transferCompletedSuccessfully();
         accountScreenPageObject.backPageButton().click();
         validation.remainingBalance();
         if (!accountScreenPageObject.exitAccountButton().isSelected()) {
@@ -53,5 +51,24 @@ public class TransferStep {
         } else {
             Report.logCapture(Status.FAIL, "Não saiu da conta.");
         }
+    }
+
+    private void fillInTransferFields() throws IOException {
+        transferPageObject.numberAccountTextField().sendKeys(getDataUser("2_user", "accountNumber"));
+        transferPageObject.digitTextField().sendKeys(getDataUser("2_user", "digit"));
+        RecorderSet.fakeValue(transferPageObject.transferAmountTextField(), "1_user", "value");
+        transferPageObject.descriptionTextField().sendKeys(getDataUser("1_user", "description"));
+        Report.logCapture(Status.INFO, "Observer nos campos de transferencia.");
+    }
+
+    private void transferCompletedSuccessfully() {
+        if(!transferPageObject.transferNowButton().isSelected()) {
+            transferPageObject.transferNowButton().click();
+            validation.transferCompletedSuccessfully();
+            Report.logCapture(Status.PASS, "Transferencia realizada com sucesso.");
+        } else {
+            Report.logCapture(Status.FAIL, "Ocorreu um erro na transferencia.");
+        }
+        transferPageObject.closeModalButton().click();
     }
 }
