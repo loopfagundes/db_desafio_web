@@ -2,6 +2,7 @@ package app.netlify.bugbank.validations;
 
 import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
 import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
+import app.netlify.bugbank.pageobjects.TransferPageObject;
 import app.netlify.bugbank.supports.RecorderSet;
 import app.netlify.bugbank.utils.Report;
 import com.aventstack.extentreports.Status;
@@ -13,10 +14,12 @@ import java.io.IOException;
 public class Validation {
     private final CreateAccountPageObject createAccountPageObject;
     private final AccountScreenPageObject accountScreenPageObject;
+    private final TransferPageObject transferPageObject;
 
     public Validation(WebDriver driver) {
         createAccountPageObject = new CreateAccountPageObject(driver);
         accountScreenPageObject = new AccountScreenPageObject(driver);
+        transferPageObject = new TransferPageObject(driver);
     }
 
     public void createAccountSuccess() {
@@ -34,7 +37,7 @@ public class Validation {
     }
 
     public void transferCompletedSuccessfully() {
-        Assert.assertEquals(accountScreenPageObject.transferSuccessfullyLabel().getText(), "Transferencia realizada com sucesso");
+        Assert.assertEquals(transferPageObject.transferSuccessfullyLabel().getText(), "Transferencia realizada com sucesso");
     }
 
     public void remainingBalance() throws IOException {
