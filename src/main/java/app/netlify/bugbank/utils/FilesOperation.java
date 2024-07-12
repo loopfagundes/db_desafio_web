@@ -27,7 +27,7 @@ public class FilesOperation {
             prop.load(inputStream);
             return prop;
         } catch (Exception e) {
-            System.out.println("Não carregou o arquivo" + e.getMessage());
+            LoggerFactory.log_INFO("Não carregou o arquivo" + e.getMessage());
         } finally {
             assert inputStream != null;
             inputStream.close();
@@ -49,7 +49,7 @@ public class FilesOperation {
             outputStream = new FileOutputStream(file);
             properties.store(outputStream, null);
         } catch (Exception e) {
-            System.out.println("Não foi possível salvar as propriedades: " + e.getMessage());
+            LoggerFactory.log_INFO("Não foi possível salvar as propriedades: " + e.getMessage());
         } finally {
             if (outputStream != null) {
                 outputStream.close();
