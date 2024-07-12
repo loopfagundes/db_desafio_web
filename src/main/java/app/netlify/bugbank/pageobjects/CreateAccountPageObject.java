@@ -15,23 +15,23 @@ public class CreateAccountPageObject {
     }
 
     public WebElement registerButton() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[3]/button[2]"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[1]/form/div[3]/button[2]"));
     }
 
     public WebElement registerEmailTextField() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[2]/input"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[2]/form/div[2]/input"));
     }
 
     public WebElement nameUserTextField() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[3]/input"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[2]/form/div[3]/input"));
     }
 
     public WebElement registerPasswordTextField() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[4]/div/input"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[2]/form/div[4]/div/input"));
     }
 
     public WebElement confirmationPasswordTextField() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[5]/div/input"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[2]/form/div[5]/div/input"));
     }
 
     public WebElement balanceAccountButton() {
@@ -39,7 +39,7 @@ public class CreateAccountPageObject {
     }
 
     public WebElement registerAccountButton() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[2]/form/button"));
     }
 
     public WebElement successCloseModalButton() {

@@ -6,12 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class AccountScreenPageObject {
-    private final WebDriver driver;
     private final WaitElement wait;
 
-    public AccountScreenPageObject(WebDriver _driver) {
-        driver = _driver;
-        wait = new WaitElement(_driver);
+    public AccountScreenPageObject(WebDriver driver) {
+        wait = new WaitElement(driver);
     }
 
     public WebElement emailTextField() {
@@ -38,24 +36,24 @@ public class AccountScreenPageObject {
         return wait.toBeClickable(By.id("btn-TRANSFERÊNCIA"));
     }
 
-    public WebElement justNumberAccountTextField() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[3]/form/div[1]/div[1]/input"));
+    public WebElement numberAccountTextField() {
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[3]/form/div[1]/div[1]/input"));
     }
 
-    public WebElement accountDigitTextField() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[3]/form/div[1]/div[2]/input"));
+    public WebElement digitTextField() {
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[3]/form/div[1]/div[2]/input"));
     }
 
     public WebElement transferAmountTextField() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[3]/form/div[2]/input"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[3]/form/div[2]/input"));
     }
 
     public WebElement descriptionTextField() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[3]/form/div[3]/input"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[3]/form/div[3]/input"));
     }
 
     public WebElement transferNowButton() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[3]/form/button"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[3]/form/button"));
     }
 
     public WebElement transferSuccessfullyLabel() {
@@ -71,7 +69,7 @@ public class AccountScreenPageObject {
     }
 
     public WebElement exitAccountButton() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[1]/div"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[1]/div"));
     }
 
     public WebElement balanceStatementButton() {
@@ -83,6 +81,6 @@ public class AccountScreenPageObject {
     }
 
     public WebElement receiveValueLabel() {
-        return wait.visibilityOf(By.xpath("//*[@type=\"input\"][@id=\"textTransferValue\"]"));
+        return wait.visibilityOf(By.xpath("//*[@type='input'][@id='textTransferValue']"));
     }
 }

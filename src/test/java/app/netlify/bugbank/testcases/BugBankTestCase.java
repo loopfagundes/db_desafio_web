@@ -1,6 +1,8 @@
 package app.netlify.bugbank.testcases;
 
-import app.netlify.bugbank.steps.RegisterAccountStep;
+import app.netlify.bugbank.steps.AccountMovementStep;
+import app.netlify.bugbank.steps.CreateAccountStep;
+import app.netlify.bugbank.steps.TransferStep;
 import app.netlify.bugbank.utils.BaseTest;
 import app.netlify.bugbank.utils.Property;
 import app.netlify.bugbank.webdrivers.DriverManager;
@@ -18,10 +20,13 @@ public class BugBankTestCase extends BaseTest {
     public void BugBank() throws IOException {
         WebDriver driver = DriverManager.getDriver();
         driver.get(Property.get("url"));
-        RegisterAccountStep register = new RegisterAccountStep(driver);
-        register.newUser1();
+        CreateAccountStep register = new CreateAccountStep(driver);
+        TransferStep transfer = new TransferStep(driver);
+        AccountMovementStep accountMovement = new AccountMovementStep(driver);
+        register.dataFirstUser();
         driver.navigate().refresh();
-        register.newUser2();
-        //AccountScreenStep account = new AccountScreenStep(driver);
+        register.dataSecondUser();
+        transfer.makeTransfer();
+        accountMovement.receiveTheBalance();
     }
 }

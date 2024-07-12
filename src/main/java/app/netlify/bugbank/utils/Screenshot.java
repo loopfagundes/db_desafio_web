@@ -2,14 +2,14 @@ package app.netlify.bugbank.utils;
 
 import app.netlify.bugbank.webdrivers.DriverManager;
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.model.Media;
 import com.aventstack.extentreports.service.ExtentTestManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 public class Screenshot {
-    public static Media capture() {
+    public static MediaEntityModelProvider capture() {
         String base64image = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
 
         try {
