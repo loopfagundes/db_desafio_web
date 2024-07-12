@@ -75,6 +75,7 @@ Após a execução do projeto, para visualizar o relatório:
 Abra a pasta de report e selecione o arquivo report.html. 
 Clique com o botão direito do mouse, vá em "Open in", depois "Browser" e escolha o navegador da sua preferência.
 ![](src/main/resources/img/report.png)
+
 ---
 Feito com bug, café e muito esforço :beetle::coffee:
 
