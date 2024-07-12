@@ -45,12 +45,7 @@ public class TransferStep {
         transferCompletedSuccessfully();
         accountScreenPageObject.backPageButton().click();
         validation.remainingBalance();
-        if (!accountScreenPageObject.exitAccountButton().isSelected()) {
-            accountScreenPageObject.exitAccountButton().click();
-            Report.logCapture(Status.PASS, "O primeiro usuario saiu da conta com sucesso.");
-        } else {
-            Report.logCapture(Status.FAIL, "Não saiu da conta.");
-        }
+        exitAccount();
     }
 
     private void fillInTransferFields() throws IOException {
@@ -70,5 +65,14 @@ public class TransferStep {
             Report.logCapture(Status.FAIL, "Ocorreu um erro na transferencia.");
         }
         transferPageObject.closeModalButton().click();
+    }
+
+    private void exitAccount() {
+        if (!accountScreenPageObject.exitAccountButton().isSelected()) {
+            accountScreenPageObject.exitAccountButton().click();
+            Report.logCapture(Status.PASS, "O primeiro usuario saiu da conta com sucesso.");
+        } else {
+            Report.logCapture(Status.FAIL, "Não saiu da conta.");
+        }
     }
 }
