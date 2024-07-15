@@ -26,7 +26,7 @@ public class CreateAccountStep {
     }
 
     public void dataFirstUser() throws Exception {
-        crypto("1_user_crypto");
+        firstUserEncrypt("1_user_crypto");
         register("1_user",
                 decryptoEmail("1_user_crypto"),
                 decryptoName("1_user_crypto"),
@@ -34,7 +34,7 @@ public class CreateAccountStep {
     }
 
     public void dataSecondUser() throws Exception {
-        crypto("2_user_crypto");
+        secondUserEncrypt("2_user_crypto");
         register("2_user",
                 decryptoEmail("2_user_crypto"),
                 decryptoName("2_user_crypto"),

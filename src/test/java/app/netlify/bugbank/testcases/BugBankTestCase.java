@@ -23,8 +23,8 @@ public class BugBankTestCase extends BaseTest {
     public void registerTest() throws Exception {
         CreateAccountStep register = new CreateAccountStep(driver());
         register.dataFirstUser();
-//        driver().navigate().refresh();
-//        register.dataSecondUser();
+        driver().navigate().refresh();
+        register.dataSecondUser();
     }
 //
 //    @Test(
