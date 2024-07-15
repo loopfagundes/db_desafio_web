@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class RecorderGet {
 
-    public static String getDataUser(String nameProp, String key) throws IOException {
-        return FilesOperation.getProperties(nameProp).getProperty(key);
+    public static String getDataUser(String nameFile, String nameProp, String key) throws IOException {
+        return FilesOperation.getProperties(nameFile, nameProp).getProperty(key);
     }
 }

@@ -43,21 +43,21 @@ public class Validation {
 
     public void remainingBalance() throws IOException {
         Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(),
-                RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "1_user", "cashBalance"));
+                RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "dataUser", "1_user", "cashBalance"));
     }
 
     public void secondUserAccountPage() throws IOException {
         Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá User_2,");
         Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(),
-                RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "2_user", "cashBalance"));
+                RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "dataUser", "2_user", "cashBalance"));
         Report.logCapture(Status.INFO, "Observer o saldo do Usuario 2.");
     }
 
     public void accountMovement() throws IOException {
         Assert.assertEquals(accountScreenPageObject.balanceAvailableLabel().getText(),
-                RecorderSet.cash(accountScreenPageObject.balanceAvailableLabel(), "2_user", "balanceAvailable"));
+                RecorderSet.cash(accountScreenPageObject.balanceAvailableLabel(), "dataUser", "2_user", "balanceAvailable"));
         Assert.assertEquals(accountScreenPageObject.receiveValueLabel().getText(),
-                RecorderSet.cash(accountScreenPageObject.receiveValueLabel(), "2_user", "receiveCash"));
+                RecorderSet.cash(accountScreenPageObject.receiveValueLabel(), "dataUser", "2_user", "receiveCash"));
         Report.logCapture(Status.INFO, "Observer o extrato do Usuario 2.");
     }
 }

@@ -22,21 +22,21 @@ public class SecurePropertiesWriter {
         String encryptedPassword = Crypto.encrypt(UserData.firstUser().getPassword());
 
         // Armazenar dados criptografados
-        FilesOperation.setProperty(nameProp, "email", encryptedEmail);
-        FilesOperation.setProperty(nameProp, "name", encryptedName);
-        FilesOperation.setProperty(nameProp, "password", encryptedPassword);
+        FilesOperation.setProperty("dataUser", nameProp, "email", encryptedEmail);
+        FilesOperation.setProperty("dataUser", nameProp, "name", encryptedName);
+        FilesOperation.setProperty("dataUser", nameProp, "password", encryptedPassword);
         LoggerFactory.log_INFO("Dados criptografados e armazenados com sucesso.");
     }
 
     public static String encryptoEmail(String nameProp) throws Exception {
-        return Crypto.decrypt(RecorderGet.getDataUser(nameProp, "email"));
+        return Crypto.decrypt(RecorderGet.getDataUser("dataUser", nameProp, "email"));
     }
 
     public static String encryptoName(String nameProp) throws Exception {
-        return Crypto.decrypt(RecorderGet.getDataUser(nameProp, "name"));
+        return Crypto.decrypt(RecorderGet.getDataUser("dataUser", nameProp, "name"));
     }
 
     public static String encryptoPassword(String nameProp) throws Exception {
-        return Crypto.decrypt(RecorderGet.getDataUser(nameProp, "password"));
+        return Crypto.decrypt(RecorderGet.getDataUser("dataUser", nameProp, "password"));
     }
 }

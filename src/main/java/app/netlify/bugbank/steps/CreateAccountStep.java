@@ -61,7 +61,7 @@ public class CreateAccountStep {
     }
 
     private void storingBankAccount(String dataUser) throws IOException {
-        RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(), dataUser, "accountNumber", "digit");
+        RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(),"dataUser", dataUser, "accountNumber", "digit");
     }
 
     private void successfullyRegistered() {
