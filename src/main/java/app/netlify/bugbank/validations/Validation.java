@@ -34,6 +34,7 @@ public class Validation {
     public void firstUserAccountPage() {
         Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá User_1,");
         Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), "Saldo em conta R$ 1.000,00");
+        Report.logCapture(Status.INFO, "Observer o saldo do Usuario 1.");
     }
 
     public void transferCompletedSuccessfully() {
@@ -49,6 +50,7 @@ public class Validation {
         Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá User_2,");
         Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(),
                 RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "2_user", "cashBalance"));
+        Report.logCapture(Status.INFO, "Observer o saldo do Usuario 2.");
     }
 
     public void accountMovement() throws IOException {
@@ -56,5 +58,6 @@ public class Validation {
                 RecorderSet.cash(accountScreenPageObject.balanceAvailableLabel(), "2_user", "balanceAvailable"));
         Assert.assertEquals(accountScreenPageObject.receiveValueLabel().getText(),
                 RecorderSet.cash(accountScreenPageObject.receiveValueLabel(), "2_user", "receiveCash"));
+        Report.logCapture(Status.INFO, "Observer o extrato do Usuario 2.");
     }
 }
