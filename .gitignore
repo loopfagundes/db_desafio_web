@@ -5,4 +5,3 @@ target/
 .settings/
 .project
 .classpath
-src/test/resources/dataUser/1_user_crypto.properties

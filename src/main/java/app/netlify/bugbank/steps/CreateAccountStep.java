@@ -3,19 +3,15 @@ package app.netlify.bugbank.steps;
 import app.netlify.bugbank.data.UserModel;
 import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
 import app.netlify.bugbank.supports.RecorderSet;
-import app.netlify.bugbank.utils.FilesOperation;
 import app.netlify.bugbank.utils.JsExecutor;
 import app.netlify.bugbank.utils.Report;
-import app.netlify.bugbank.utils.security.Crypto;
-import app.netlify.bugbank.utils.security.SecurePropertiesReader;
-import app.netlify.bugbank.utils.security.SecurePropertiesWriter;
 import app.netlify.bugbank.validations.Validation;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 
-import static app.netlify.bugbank.utils.security.SecurePropertiesWriter.*;
+import static app.netlify.bugbank.utils.security.SecureProperties.*;
 
 public class CreateAccountStep {
     private final WebDriver driver;
@@ -32,14 +28,17 @@ public class CreateAccountStep {
     public void dataFirstUser() throws Exception {
         crypto("1_user_crypto");
         register("1_user",
-                encryptoEmail("1_user_crypto"),
-                encryptoName("1_user_crypto"),
-                encryptoPassword("1_user_crypto"));
+                decryptoEmail("1_user_crypto"),
+                decryptoName("1_user_crypto"),
+                decryptoPassword("1_user_crypto"));
     }
 
-    public void dataSecondUser() throws IOException {
-        //data = new UserModel("2_user");
-        //register("2_user", data.getEmail(), data.getName(), data.getPassword());
+    public void dataSecondUser() throws Exception {
+        crypto("2_user_crypto");
+        register("2_user",
+                decryptoEmail("2_user_crypto"),
+                decryptoName("2_user_crypto"),
+                decryptoPassword("2_user_crypto"));
     }
 
     private void register(String dataUser, String email, String name, String password) throws IOException {

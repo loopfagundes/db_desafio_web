@@ -1,8 +1,8 @@
-package app.netlify.bugbank.utils.security;
-
-import app.netlify.bugbank.utils.FilesOperation;
-
-public class SecurePropertiesReader {
+//package app.netlify.bugbank.utils.security;
+//
+//import app.netlify.bugbank.utils.FilesOperation;
+//
+//public class SecurePropertiesReader {
 //    public static void main(String[] args) {
 //
 //        try {
@@ -21,4 +21,4 @@ public class SecurePropertiesReader {
 //        System.out.println("Name: " + name );
 //        System.out.println("Senha: " + password);
 //    }
-}
+//}
