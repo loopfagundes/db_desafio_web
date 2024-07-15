@@ -32,7 +32,7 @@ public class FilesOperation {
 
         try {
             File file = new File(DIR_PATH_PROPERTIES + name + ".properties");
-            inputStream = new FileInputStream(file);
+            inputStream = Files.newInputStream(file.toPath());
             prop.load(inputStream);
             return prop;
         } catch (Exception e) {
