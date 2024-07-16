@@ -22,7 +22,6 @@ public class FilesOperation {
         try (OutputStream output = Files.newOutputStream(Path.of(DIR_PATH_PROPERTIES + folderName + "/" + createNameProp + ".properties"))) {
             Properties properties = new Properties();
             properties.store(output, "");
-            System.out.println("Propriedade salva com sucesso!");
         } catch (IOException e) {
            throw new RuntimeException(e);
         }
@@ -73,7 +72,6 @@ public class FilesOperation {
                 try (DirectoryStream<Path> stream = Files.newDirectoryStream(directoryPath, "*.properties")) {
                     for (Path entry : stream) {
                         Files.delete(entry);
-                        System.out.println("Arquivo '" + entry.getFileName() + "' apagado com sucesso!");
                     }
                 }
             } else {

@@ -1,24 +1,25 @@
 package app.netlify.bugbank.utils.security;
 
-import app.netlify.bugbank.data.UserData;
 import app.netlify.bugbank.utils.FilesOperation;
-import app.netlify.bugbank.utils.LoggerFactory;
 
 import java.io.IOException;
+
+import static app.netlify.bugbank.data.UserData.*;
+import static app.netlify.bugbank.utils.security.Crypto.*;
 
 public class SecureProperties {
 
     public static void firstUserEncrypt(String createName, String nameProp) throws Exception {
-        String encryptedEmail = Crypto.encrypt(UserData.firstUser().getEmail());
-        String encryptedName = Crypto.encrypt(UserData.firstUser().getName());
-        String encryptedPassword = Crypto.encrypt(UserData.firstUser().getPassword());
+        String encryptedEmail = encrypt(firstUser().getEmail());
+        String encryptedName = encrypt(firstUser().getName());
+        String encryptedPassword = encrypt(firstUser().getPassword());
         storeTheDataForEncryption(createName, nameProp, encryptedEmail, encryptedName, encryptedPassword);
     }
 
     public static void secondUserEncrypt(String createName, String nameProp) throws Exception {
-        String encryptedEmail = Crypto.encrypt(UserData.secondUser().getEmail());
-        String encryptedName = Crypto.encrypt(UserData.secondUser().getName());
-        String encryptedPassword = Crypto.encrypt(UserData.secondUser().getPassword());
+        String encryptedEmail = encrypt(secondUser().getEmail());
+        String encryptedName = encrypt(secondUser().getName());
+        String encryptedPassword = encrypt(secondUser().getPassword());
         storeTheDataForEncryption(createName, nameProp, encryptedEmail, encryptedName, encryptedPassword);
     }
 
@@ -27,7 +28,6 @@ public class SecureProperties {
         FilesOperation.setProperties("dataUser", nameProp, "email", encryptedEmail);
         FilesOperation.setProperties("dataUser", nameProp, "name", encryptedName);
         FilesOperation.setProperties("dataUser", nameProp, "password", encryptedPassword);
-        LoggerFactory.log_INFO("Dados criptografados e armazenados com sucesso.");
     }
 
     public static void createProperties() {

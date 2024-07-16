@@ -1,12 +1,11 @@
 package app.netlify.bugbank.testcases;
 
 import app.netlify.bugbank.steps.CreateAccountStep;
+import app.netlify.bugbank.steps.TransferStep;
 import app.netlify.bugbank.utils.BaseTest;
 import app.netlify.bugbank.webdrivers.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
 
 public class BugBankTestCase extends BaseTest {
 
@@ -25,17 +24,17 @@ public class BugBankTestCase extends BaseTest {
         driver().navigate().refresh();
         register.dataSecondUser();
     }
-//
-//    @Test(
-//            description = "Realizada a transferência bancária.",
-//            groups = {"web"},
-//            priority = 2
-//    )
-//    public void transferTest() throws IOException {
-//        TransferStep transfer = new TransferStep(driver());
-//        transfer.makeTransfer();
-//    }
-//
+
+    @Test(
+            description = "Realizada a transferência bancária.",
+            groups = {"web"},
+            priority = 2
+    )
+    public void transferTest() throws Exception {
+        TransferStep transfer = new TransferStep(driver());
+        transfer.makeTransfer();
+    }
+
 //    @Test (
 //            description = "Receber o saldo da transferência.",
 //            groups = {"web"},

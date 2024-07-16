@@ -1,6 +1,5 @@
 package app.netlify.bugbank.steps;
 
-import app.netlify.bugbank.data.UserModel;
 import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
 import app.netlify.bugbank.supports.RecorderSet;
 import app.netlify.bugbank.utils.JsExecutor;
