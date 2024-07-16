@@ -36,7 +36,7 @@ public class FilesOperation {
             properties.load(inputStream);
             return properties;
         } catch (Exception e) {
-            LoggerFactory.log_INFO("Não carregou o arquivo" + e.getMessage());
+            LoggerFactory.log_WARNING("Não carregou o arquivo" + e.getMessage());
         } finally {
             assert inputStream != null;
             inputStream.close();
@@ -57,28 +57,11 @@ public class FilesOperation {
             outputStream = Files.newOutputStream(file.toPath());
             properties.store(outputStream, null);
         } catch (Exception e) {
-            LoggerFactory.log_INFO("Não foi possível salvar as propriedades: " + e.getMessage());
+            LoggerFactory.log_WARNING("Não foi possível salvar as propriedades: " + e.getMessage());
         } finally {
             if (outputStream != null) {
                 outputStream.close();
             }
-        }
-    }
-
-    public static void deleteAllProperties(String nameFolder) {
-        Path directoryPath = Paths.get("src/test/resources/" + nameFolder);
-        try {
-            if (Files.exists(directoryPath) && Files.isDirectory(directoryPath)) {
-                try (DirectoryStream<Path> stream = Files.newDirectoryStream(directoryPath, "*.properties")) {
-                    for (Path entry : stream) {
-                        Files.delete(entry);
-                    }
-                }
-            } else {
-                LoggerFactory.log_INFO("A pasta '" + directoryPath + "' não existe ou não é um diretório.");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }

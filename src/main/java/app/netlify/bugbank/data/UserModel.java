@@ -10,13 +10,13 @@ public class UserModel {
     String name;
     String password;
 
+    public UserModel() {
+
+    }
+
     public UserModel(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;
-    }
-
-    public UserModel() {
-
     }
 }

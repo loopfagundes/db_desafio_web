@@ -37,7 +37,7 @@ public class SecureProperties {
         FilesOperation.createProperties("dataUSer", "2_user");
     }
 
-    public static void deleteProperties() {
-        FilesOperation.deleteAllProperties("dataUSer");
-    }
+//    public static void deleteProperties() {
+//        FilesOperation.deleteAllProperties("dataUSer");
+//    }
 }

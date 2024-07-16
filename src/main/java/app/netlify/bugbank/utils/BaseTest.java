@@ -1,6 +1,5 @@
 package app.netlify.bugbank.utils;
 
-import app.netlify.bugbank.utils.security.SecureProperties;
 import app.netlify.bugbank.webdrivers.BrowserEnum;
 import app.netlify.bugbank.webdrivers.DriverFactory;
 import app.netlify.bugbank.webdrivers.DriverManager;
@@ -13,8 +12,7 @@ public class BaseTest {
 
     @BeforeTest
     public void setUp() {
-        SecureProperties.deleteProperties();
-        SecureProperties.createProperties();
+        DirectoryOperation.OperationFolder();
         WebDriver driver = DriverFactory.createInstance(BrowserEnum.CHROME);
         DriverManager.setDriver(driver);
         driver.manage().window().maximize();
