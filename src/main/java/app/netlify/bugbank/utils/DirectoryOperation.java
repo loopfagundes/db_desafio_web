@@ -1,6 +1,6 @@
 package app.netlify.bugbank.utils;
 
-import app.netlify.bugbank.utils.security.SecureProperties;
+import app.netlify.bugbank.security.SecureProperties;
 
 import java.io.File;
 import java.io.IOException;

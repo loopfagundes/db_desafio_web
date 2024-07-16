@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 
 import static app.netlify.bugbank.supports.RecorderGet.getDataUser;
-import static app.netlify.bugbank.utils.security.DecrytData.*;
+import static app.netlify.bugbank.security.DecrytData.*;
 
 public class TransferStep {
     private final AccountScreenPageObject accountScreenPageObject;

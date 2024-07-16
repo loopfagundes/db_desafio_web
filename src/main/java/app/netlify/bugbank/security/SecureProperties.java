@@ -1,11 +1,11 @@
-package app.netlify.bugbank.utils.security;
+package app.netlify.bugbank.security;
 
 import app.netlify.bugbank.utils.FilesOperation;
 
 import java.io.IOException;
 
 import static app.netlify.bugbank.data.UserData.*;
-import static app.netlify.bugbank.utils.security.Crypto.*;
+import static app.netlify.bugbank.security.Crypto.*;
 
 public class SecureProperties {
 
@@ -36,8 +36,4 @@ public class SecureProperties {
         FilesOperation.createProperties("dataUSer", "2_user_crypto");
         FilesOperation.createProperties("dataUSer", "2_user");
     }
-
-//    public static void deleteProperties() {
-//        FilesOperation.deleteAllProperties("dataUSer");
-//    }
 }

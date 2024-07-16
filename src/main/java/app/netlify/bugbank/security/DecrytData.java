@@ -1,4 +1,4 @@
-package app.netlify.bugbank.utils.security;
+package app.netlify.bugbank.security;
 
 import app.netlify.bugbank.supports.RecorderGet;
 

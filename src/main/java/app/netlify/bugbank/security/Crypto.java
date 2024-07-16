@@ -1,4 +1,4 @@
-package app.netlify.bugbank.utils.security;
+package app.netlify.bugbank.security;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
