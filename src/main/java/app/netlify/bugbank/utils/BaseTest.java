@@ -4,7 +4,6 @@ import app.netlify.bugbank.utils.security.SecureProperties;
 import app.netlify.bugbank.webdrivers.BrowserEnum;
 import app.netlify.bugbank.webdrivers.DriverFactory;
 import app.netlify.bugbank.webdrivers.DriverManager;
-import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
@@ -24,7 +23,6 @@ public class BaseTest {
 
     @AfterTest
     public void tearDown() {
-        Report.log(Status.INFO, "Encerro a sessão.");
         DriverManager.quitDriver();
     }
 }
