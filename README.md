@@ -58,6 +58,9 @@ git clone https://github.com/loopfagundes/db_desafio_web.git
 #### Como executar?
 Para executar na sua máquina local, o comando ou através de sua IDE:
 ```bash
+mvn clean
+```
+```bash
 mvn test
 ```
 Padrão do browser Chrome.
