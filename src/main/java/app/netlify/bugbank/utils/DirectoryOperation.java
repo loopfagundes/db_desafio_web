@@ -23,7 +23,7 @@ public class DirectoryOperation {
     public static void deleteDirectoryPath(String nameFolder) {
         String directoryPath = "src/test/resources/" + nameFolder;
         File directory = new File(directoryPath);
-        if (directory.exists() && directory.isDirectory()) {
+        if (directory.exists()) {
             deleteDirectory(directory);
         } else {
             LoggerFactory.log_WARNING("A pasta '" + directoryPath + "' não existe ou não é um diretório.");
