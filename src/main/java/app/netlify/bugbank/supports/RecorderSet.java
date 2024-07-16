@@ -13,8 +13,8 @@ public class RecorderSet {
         String[] numberSeparator = accountNumber.split("-");
         String number = numberSeparator[0].replaceAll("[^0-9]", "");
         String numberDigit = numberSeparator[1].replaceAll("[^0-9]", "");
-        FilesOperation.setProperty(nameFile, nameProp, numberAccount, number);
-        FilesOperation.setProperty(nameFile, nameProp, digit, numberDigit);
+        FilesOperation.setProperties(nameFile, nameProp, numberAccount, number);
+        FilesOperation.setProperties(nameFile, nameProp, digit, numberDigit);
     }
 
     public static String toReplaceAll(WebElement element) {
@@ -27,12 +27,12 @@ public class RecorderSet {
         String fakeCent = Faker.instance().number().digits(Integer.parseInt("2"));
         String fakeValue = fakeCash + "." + fakeCent;
         element.sendKeys(fakeValue);
-        FilesOperation.setProperty(nameFile, nameProp, key, fakeValue);
+        FilesOperation.setProperties(nameFile, nameProp, key, fakeValue);
     }
 
     public static String cash(WebElement element, String nameFile, String nameProp, String key) throws IOException {
         String value = element.getText();
-        FilesOperation.setProperty(nameFile, nameProp, key, value);
+        FilesOperation.setProperties(nameFile, nameProp, key, value);
         return value;
     }
 }

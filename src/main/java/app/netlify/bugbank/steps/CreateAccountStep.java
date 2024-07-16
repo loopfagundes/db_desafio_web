@@ -11,13 +11,13 @@ import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 
+import static app.netlify.bugbank.utils.security.DecrytData.*;
 import static app.netlify.bugbank.utils.security.SecureProperties.*;
 
 public class CreateAccountStep {
     private final WebDriver driver;
     private final CreateAccountPageObject createAccountPageObject;
     private final Validation validation;
-    private UserModel data;
 
     public CreateAccountStep(WebDriver _driver) {
         driver = _driver;
@@ -26,7 +26,7 @@ public class CreateAccountStep {
     }
 
     public void dataFirstUser() throws Exception {
-        firstUserEncrypt("1_user_crypto");
+        firstUserEncrypt("1_user_crypto", "1_user_crypto");
         register("1_user",
                 decryptoEmail("1_user_crypto"),
                 decryptoName("1_user_crypto"),
@@ -34,7 +34,7 @@ public class CreateAccountStep {
     }
 
     public void dataSecondUser() throws Exception {
-        secondUserEncrypt("2_user_crypto");
+        secondUserEncrypt("2_user_crypto", "2_user_crypto");
         register("2_user",
                 decryptoEmail("2_user_crypto"),
                 decryptoName("2_user_crypto"),
@@ -60,7 +60,8 @@ public class CreateAccountStep {
     }
 
     private void storingBankAccount(String dataUser) throws IOException {
-        RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(),"dataUser", dataUser, "accountNumber", "digit");
+        RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(),
+                "dataUser", dataUser, "accountNumber", "digit");
     }
 
     private void successfullyRegistered() {
