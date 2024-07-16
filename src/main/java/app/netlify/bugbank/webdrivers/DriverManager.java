@@ -1,5 +1,7 @@
 package app.netlify.bugbank.webdrivers;
 
+import app.netlify.bugbank.utils.Report;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
@@ -16,6 +18,7 @@ public class DriverManager {
     public static void quitDriver() {
         if (getDriver() != null) {
             getDriver().quit();
+            Report.log(Status.INFO, "Encerro a sessão.");
         }
     }
 }

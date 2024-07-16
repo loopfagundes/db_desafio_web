@@ -5,22 +5,22 @@ import app.netlify.bugbank.webdrivers.DriverFactory;
 import app.netlify.bugbank.webdrivers.DriverManager;
 import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 
 @Listeners({ExtentITestListenerClassAdapter.class, Report.class})
 public class BaseTest {
 
-    @BeforeMethod
+    @BeforeTest
     public void setUp() {
+        DirectoryOperation.OperationFolder();
         WebDriver driver = DriverFactory.createInstance(BrowserEnum.CHROME);
         DriverManager.setDriver(driver);
         driver.manage().window().maximize();
+        driver.get(Property.get("url"));
     }
 
-    @AfterMethod
+    @AfterTest
     public void tearDown() {
-       DriverManager.quitDriver();
+        DriverManager.quitDriver();
     }
 }

@@ -1,6 +1,5 @@
 package app.netlify.bugbank.steps;
 
-import app.netlify.bugbank.data.DataObjectUser;
 import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
 import app.netlify.bugbank.utils.Report;
 import app.netlify.bugbank.validations.Validation;
@@ -8,6 +7,8 @@ import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
+
+import static app.netlify.bugbank.security.DecrytData.*;
 
 public class AccountMovementStep {
     private final AccountScreenPageObject accountScreenPageObject;
@@ -18,11 +19,9 @@ public class AccountMovementStep {
         validation = new Validation(driver);
     }
 
-    public AccountMovementStep receiveTheBalance() throws IOException {
-        DataObjectUser data = new DataObjectUser("2_user");
-        login(data.getEmail(), data.getPassword());
+    public void receiveTheBalance() throws Exception {
+        login(decryptoEmail("2_user_crypto"), decryptoPassword("2_user_crypto"));
         bankStatement();
-        return this;
     }
 
     private void login(String emailSecond, String passwordUserSecond) throws IOException {
@@ -34,7 +33,7 @@ public class AccountMovementStep {
     }
 
     private void bankStatement() throws IOException {
-        Report.log(Status.INFO, "Movimento do bancario do usuario");
+        Report.log(Status.INFO, "Movimento bancária do usuario");
         accountScreenPageObject.balanceStatementButton().click();
         validation.accountMovement();
         if (!accountScreenPageObject.exitAccountButton().isSelected()) {

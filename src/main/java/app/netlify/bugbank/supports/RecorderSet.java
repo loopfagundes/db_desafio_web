@@ -8,13 +8,13 @@ import java.io.IOException;
 
 public class RecorderSet {
 
-    public static void ignoreTheLetters(WebElement element, String nameProp, String numberAccount, String digit) throws IOException {
+    public static void ignoreTheLetters(WebElement element, String nameFile, String nameProp, String numberAccount, String digit) throws IOException {
         String accountNumber = element.getText();
         String[] numberSeparator = accountNumber.split("-");
         String number = numberSeparator[0].replaceAll("[^0-9]", "");
         String numberDigit = numberSeparator[1].replaceAll("[^0-9]", "");
-        FilesOperation.setProperty(nameProp, numberAccount, number);
-        FilesOperation.setProperty(nameProp, digit, numberDigit);
+        FilesOperation.setProperties(nameFile, nameProp, numberAccount, number);
+        FilesOperation.setProperties(nameFile, nameProp, digit, numberDigit);
     }
 
     public static String toReplaceAll(WebElement element) {
@@ -22,17 +22,17 @@ public class RecorderSet {
         return ignoreNumbers.replaceAll("[0-9-]", "");
     }
 
-    public static void fakeValue(WebElement element, String nameProp, String key) throws IOException {
+    public static void fakeValue(WebElement element, String nameFile, String nameProp, String key) throws IOException {
         String fakeCash = Faker.instance().number().digits(Integer.parseInt("3"));
         String fakeCent = Faker.instance().number().digits(Integer.parseInt("2"));
         String fakeValue = fakeCash + "." + fakeCent;
         element.sendKeys(fakeValue);
-        FilesOperation.setProperty(nameProp, key, fakeValue);
+        FilesOperation.setProperties(nameFile, nameProp, key, fakeValue);
     }
 
-    public static String cash(WebElement element, String nameProp, String key) throws IOException {
+    public static String cash(WebElement element, String nameFile, String nameProp, String key) throws IOException {
         String value = element.getText();
-        FilesOperation.setProperty(nameProp, key, value);
+        FilesOperation.setProperties(nameFile, nameProp, key, value);
         return value;
     }
 }

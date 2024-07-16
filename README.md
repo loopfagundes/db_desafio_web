@@ -36,13 +36,15 @@
 #### Dependencias:
 :pushpin: [TestNG](https://mvnrepository.com/artifact/org.testng/testng/7.10.2),  
 
-:pushpin: [Selenium Java](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java/4.21.0),  
+:pushpin: [Selenium Java](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java/4.22.0),  
 
 :pushpin: [WebDriverManager](https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager/5.8.0),
 
 :pushpin: [Extent Reports TestNG Adapter](https://mvnrepository.com/artifact/com.aventstack/extentreports-testng-adapter/1.0.3)
 
 :pushpin: [Java Faker](https://mvnrepository.com/artifact/com.github.javafaker/javafaker/1.0.2)
+
+:pushpin: [Lombok](https://mvnrepository.com/artifact/org.projectlombok/lombok/1.18.34)
 
 ---
 
@@ -75,6 +77,7 @@ Após a execução do projeto, para visualizar o relatório:
 Abra a pasta de report e selecione o arquivo report.html. 
 Clique com o botão direito do mouse, vá em "Open in", depois "Browser" e escolha o navegador da sua preferência.
 
+#### Screenshot 
 ![](src/main/resources/img/report.png)
 
 ---

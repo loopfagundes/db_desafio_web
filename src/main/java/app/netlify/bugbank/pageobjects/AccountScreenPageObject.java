@@ -13,15 +13,15 @@ public class AccountScreenPageObject {
     }
 
     public WebElement emailTextField() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[1]/input"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[1]/form/div[1]/input"));
     }
 
     public WebElement passwordTextField() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[2]/div/input"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[1]/form/div[2]/div/input"));
     }
 
     public WebElement accessAccountButton() {
-        return wait.toBeClickable(By.xpath("//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[3]/button[1]"));
+        return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[1]/form/div[3]/button[1]"));
     }
 
     public WebElement helloUserLabel() {

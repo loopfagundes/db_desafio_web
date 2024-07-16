@@ -1,6 +1,5 @@
 package app.netlify.bugbank.steps;
 
-import app.netlify.bugbank.data.DataObjectUser;
 import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
 import app.netlify.bugbank.supports.RecorderSet;
 import app.netlify.bugbank.utils.JsExecutor;
@@ -11,11 +10,13 @@ import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 
+import static app.netlify.bugbank.security.DecrytData.*;
+import static app.netlify.bugbank.security.SecureProperties.*;
+
 public class CreateAccountStep {
     private final WebDriver driver;
     private final CreateAccountPageObject createAccountPageObject;
     private final Validation validation;
-    private DataObjectUser data;
 
     public CreateAccountStep(WebDriver _driver) {
         driver = _driver;
@@ -23,14 +24,20 @@ public class CreateAccountStep {
         validation = new Validation(_driver);
     }
 
-    public void dataFirstUser() throws IOException {
-        data = new DataObjectUser("1_user");
-        register("1_user", data.getEmail(), data.getName(), data.getPassword());
+    public void dataFirstUser() throws Exception {
+        firstUserEncrypt("1_user_crypto", "1_user_crypto");
+        register("1_user",
+                decryptoEmail("1_user_crypto"),
+                decryptoName("1_user_crypto"),
+                decryptoPassword("1_user_crypto"));
     }
 
-    public void dataSecondUser() throws IOException {
-        data = new DataObjectUser("2_user");
-        register("2_user", data.getEmail(), data.getName(), data.getPassword());
+    public void dataSecondUser() throws Exception {
+        secondUserEncrypt("2_user_crypto", "2_user_crypto");
+        register("2_user",
+                decryptoEmail("2_user_crypto"),
+                decryptoName("2_user_crypto"),
+                decryptoPassword("2_user_crypto"));
     }
 
     private void register(String dataUser, String email, String name, String password) throws IOException {
@@ -52,7 +59,8 @@ public class CreateAccountStep {
     }
 
     private void storingBankAccount(String dataUser) throws IOException {
-        RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(), dataUser, "accountNumber", "digit");
+        RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(),
+                "dataUser", dataUser, "accountNumber", "digit");
     }
 
     private void successfullyRegistered() {

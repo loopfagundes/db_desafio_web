@@ -1,6 +1,5 @@
 package app.netlify.bugbank.steps;
 
-import app.netlify.bugbank.data.DataObjectUser;
 import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
 import app.netlify.bugbank.pageobjects.TransferPageObject;
 import app.netlify.bugbank.supports.RecorderSet;
@@ -12,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 
 import static app.netlify.bugbank.supports.RecorderGet.getDataUser;
+import static app.netlify.bugbank.security.DecrytData.*;
 
 public class TransferStep {
     private final AccountScreenPageObject accountScreenPageObject;
@@ -24,9 +24,8 @@ public class TransferStep {
         validation = new Validation(driver);
     }
 
-    public void makeTransfer() throws IOException {
-        DataObjectUser data = new DataObjectUser("1_user");
-        login(data.getEmail(), data.getPassword());
+    public void makeTransfer() throws Exception {
+        login(decryptoEmail("1_user_crypto"), decryptoPassword("1_user_crypto"));
         transferBankBalance();
     }
 
@@ -49,10 +48,10 @@ public class TransferStep {
     }
 
     private void fillInTransferFields() throws IOException {
-        transferPageObject.numberAccountTextField().sendKeys(getDataUser("2_user", "accountNumber"));
-        transferPageObject.digitTextField().sendKeys(getDataUser("2_user", "digit"));
-        RecorderSet.fakeValue(transferPageObject.transferAmountTextField(), "1_user", "value");
-        transferPageObject.descriptionTextField().sendKeys(getDataUser("1_user", "description"));
+        transferPageObject.numberAccountTextField().sendKeys(getDataUser("dataUser","2_user", "accountNumber"));
+        transferPageObject.digitTextField().sendKeys(getDataUser("dataUser","2_user", "digit"));
+        RecorderSet.fakeValue(transferPageObject.transferAmountTextField(), "dataUser","1_user", "value");
+        transferPageObject.descriptionTextField().sendKeys("balance transfer.");
         Report.logCapture(Status.INFO, "Observer nos campos de transferencia.");
     }
 
