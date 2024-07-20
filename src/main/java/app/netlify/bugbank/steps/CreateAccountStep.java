@@ -1,6 +1,7 @@
 package app.netlify.bugbank.steps;
 
 import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
+import app.netlify.bugbank.security.SecureProperties;
 import app.netlify.bugbank.supports.RecorderSet;
 import app.netlify.bugbank.utils.JsExecutor;
 import app.netlify.bugbank.utils.Report;
@@ -24,24 +25,13 @@ public class CreateAccountStep {
         validation = new Validation(_driver);
     }
 
-    public void dataFirstUser() throws Exception {
-        firstUserEncrypt("1_user_crypto", "1_user_crypto");
-        register("1_user",
-                decryptoEmail("1_user_crypto"),
-                decryptoName("1_user_crypto"),
-                decryptoPassword("1_user_crypto"));
-    }
-
-    public void dataSecondUser() throws Exception {
-        secondUserEncrypt("2_user_crypto", "2_user_crypto");
-        register("2_user",
-                decryptoEmail("2_user_crypto"),
-                decryptoName("2_user_crypto"),
-                decryptoPassword("2_user_crypto"));
+    public void createNewUser(String user, String createName, String nameProp, String dataUser, String decrypto) throws Exception {
+        SecureProperties.dataUser(user, createName, nameProp);
+        register(dataUser, decryptoEmail(decrypto), decryptoName(decrypto), decryptoPassword(decrypto));
     }
 
     private void register(String dataUser, String email, String name, String password) throws IOException {
-        Report.log(Status.INFO,"Fazer cadastrar novo um usuario.");
+        Report.log(Status.INFO, "Fazer cadastrar novo um usuario.");
         createAccountPageObject.registerButton().click();
         fillInTheFields(email, name, password);
         JsExecutor.click(driver, createAccountPageObject.balanceAccountButton());
@@ -51,7 +41,7 @@ public class CreateAccountStep {
     }
 
     private void fillInTheFields(String email, String name, String password) {
-        Report.log(Status.INFO,"Preencha os campos");
+        Report.log(Status.INFO, "Preencha os campos");
         createAccountPageObject.registerEmailTextField().sendKeys(email);
         createAccountPageObject.nameUserTextField().sendKeys(name);
         createAccountPageObject.registerPasswordTextField().sendKeys(password);

@@ -1,5 +1,6 @@
 package app.netlify.bugbank.testcases;
 
+import app.netlify.bugbank.security.SecureProperties;
 import app.netlify.bugbank.steps.AccountMovementStep;
 import app.netlify.bugbank.steps.CreateAccountStep;
 import app.netlify.bugbank.steps.TransferStep;
@@ -21,9 +22,9 @@ public class BugBankTestCase extends BaseTest {
     )
     public void registerTest() throws Exception {
         CreateAccountStep register = new CreateAccountStep(driver());
-        register.dataFirstUser();
+        register.createNewUser("firstUser", "1_user_crypto", "1_user_crypto", "1_user", "1_user_crypto");
         driver().navigate().refresh();
-        register.dataSecondUser();
+        register.createNewUser("secondUser", "2_user_crypto", "2_user_crypto", "2_user", "2_user_crypto");
     }
 
     @Test(

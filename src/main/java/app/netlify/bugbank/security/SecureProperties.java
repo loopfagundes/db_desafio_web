@@ -9,14 +9,14 @@ import static app.netlify.bugbank.security.Crypto.*;
 
 public class SecureProperties {
 
-    public static void firstUserEncrypt(String createName, String nameProp) throws Exception {
+    private static void firstUserEncrypt(String createName, String nameProp) throws Exception {
         String encryptedEmail = encrypt(firstUser().getEmail());
         String encryptedName = encrypt(firstUser().getName());
         String encryptedPassword = encrypt(firstUser().getPassword());
         storeTheDataForEncryption(createName, nameProp, encryptedEmail, encryptedName, encryptedPassword);
     }
 
-    public static void secondUserEncrypt(String createName, String nameProp) throws Exception {
+    private static void secondUserEncrypt(String createName, String nameProp) throws Exception {
         String encryptedEmail = encrypt(secondUser().getEmail());
         String encryptedName = encrypt(secondUser().getName());
         String encryptedPassword = encrypt(secondUser().getPassword());
@@ -28,6 +28,17 @@ public class SecureProperties {
         FilesOperation.setProperties("dataUser", nameProp, "email", encryptedEmail);
         FilesOperation.setProperties("dataUser", nameProp, "name", encryptedName);
         FilesOperation.setProperties("dataUser", nameProp, "password", encryptedPassword);
+    }
+
+    public static void dataUser(String user, String createName, String nameProp) throws Exception {
+        switch (user) {
+            case "firstUser":
+                firstUserEncrypt(createName, nameProp);
+                break;
+            case "secondUser":
+                secondUserEncrypt(createName, nameProp);
+                break;
+        }
     }
 
     public static void createProperties() {
