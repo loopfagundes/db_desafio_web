@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 
 import static app.netlify.bugbank.security.DecrytData.*;
-import static app.netlify.bugbank.security.SecureProperties.*;
 
 public class CreateAccountStep {
     private final WebDriver driver;
