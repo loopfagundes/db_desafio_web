@@ -48,15 +48,15 @@ public class TransferStep {
     }
 
     private void fillInTransferFields() throws IOException {
-        transferPageObject.numberAccountTextField().sendKeys(getDataUser("dataUser","2_user", "accountNumber"));
-        transferPageObject.digitTextField().sendKeys(getDataUser("dataUser","2_user", "digit"));
-        RecorderSet.fakeValue(transferPageObject.transferAmountTextField(), "dataUser","1_user", "value");
+        transferPageObject.numberAccountTextField().sendKeys(getDataUser("dataUser", "2_user", "accountNumber"));
+        transferPageObject.digitTextField().sendKeys(getDataUser("dataUser", "2_user", "digit"));
+        RecorderSet.fakeValue(transferPageObject.transferAmountTextField(), "dataUser", "1_user", "value");
         transferPageObject.descriptionTextField().sendKeys("balance transfer.");
         Report.logCapture(Status.INFO, "Observer nos campos de transferencia.");
     }
 
     private void transferCompletedSuccessfully() {
-        if(!transferPageObject.transferNowButton().isSelected()) {
+        if (!transferPageObject.transferNowButton().isSelected()) {
             transferPageObject.transferNowButton().click();
             validation.transferCompletedSuccessfully();
             Report.logCapture(Status.PASS, "Transferencia realizada com sucesso.");
