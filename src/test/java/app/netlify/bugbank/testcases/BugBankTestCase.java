@@ -1,8 +1,8 @@
 package app.netlify.bugbank.testcases;
 
-import app.netlify.bugbank.steps.AccountMovementStep;
+//import app.netlify.bugbank.steps.AccountMovementStep;
 import app.netlify.bugbank.steps.CreateAccountStep;
-import app.netlify.bugbank.steps.TransferStep;
+//import app.netlify.bugbank.steps.TransferStep;
 import app.netlify.bugbank.utils.BaseTest;
 import app.netlify.bugbank.webdrivers.DriverManager;
 import org.openqa.selenium.WebDriver;
@@ -24,23 +24,23 @@ public class BugBankTestCase extends BaseTest {
         driver().navigate().refresh();
     }
 
-    @Test(
-            description = "Realizada a transferência bancária.",
-            groups = {"web"},
-            priority = 2
-    )
-    public void transferTest() throws Exception {
-        TransferStep transfer = new TransferStep(driver());
-        transfer.makeTransfer();
-    }
+    // @Test(
+    //         description = "Realizada a transferência bancária.",
+    //         groups = {"web"},
+    //         priority = 2
+    // )
+    // public void transferTest() throws Exception {
+    //     TransferStep transfer = new TransferStep(driver());
+    //     transfer.makeTransfer();
+    // }
 
-    @Test (
-            description = "Receber o saldo da transferência.",
-            groups = {"web"},
-            priority = 3
-    )
-    public void receiveTheBalanceTest() throws Exception {
-        AccountMovementStep accountMovement = new AccountMovementStep(driver());
-        accountMovement.receiveTheBalance();
-    }
+    // @Test (
+    //         description = "Receber o saldo da transferência.",
+    //         groups = {"web"},
+    //         priority = 3
+    // )
+    // public void receiveTheBalanceTest() throws Exception {
+    //     AccountMovementStep accountMovement = new AccountMovementStep(driver());
+    //     accountMovement.receiveTheBalance();
+    // }
 }

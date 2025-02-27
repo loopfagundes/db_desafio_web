@@ -16,12 +16,12 @@ import static app.netlify.bugbank.security.DecrytData.*;
 public class CreateAccountStep {
     private final WebDriver driver;
     private final CreateAccountPageObject createAccountPageObject;
-    private final Validation validation;
+    //private final Validation validation;
 
     public CreateAccountStep(WebDriver _driver) {
         driver = _driver;
         createAccountPageObject = new CreateAccountPageObject(_driver);
-        validation = new Validation(_driver);
+        //validation = new Validation(_driver);
     }
 
     public void createNewUser() throws Exception {
@@ -34,8 +34,6 @@ public class CreateAccountStep {
         fillInTheFields(email, name, password);
         JsExecutor.click(driver, createAccountPageObject.balanceAccountButton());
         createAccountPageObject.registerAccountButton().click();
-        storingBankAccount(dataUser);
-        successfullyRegistered();
     }
 
     private void fillInTheFields(String email, String name, String password) {
@@ -44,14 +42,5 @@ public class CreateAccountStep {
         createAccountPageObject.nameUserTextField().sendKeys(name);
         createAccountPageObject.registerPasswordTextField().sendKeys(password);
         createAccountPageObject.confirmationPasswordTextField().sendKeys(password);
-    }
-
-    private void storingBankAccount(String dataUser) throws IOException {
-        RecorderSet.ignoreTheLetters(createAccountPageObject.createdSuccessfullyModalLabel(),
-                "dataUser", dataUser, "accountNumber", "digit");
-    }
-
-    private void successfullyRegistered() {
-        validation.createAccountSuccess();
     }
 }

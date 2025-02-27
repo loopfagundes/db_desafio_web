@@ -12,7 +12,6 @@ public class BaseTest {
 
     @BeforeTest
     public void setUp() {
-        DirectoryOperation.OperationFolder();
         WebDriver driver = DriverFactory.createInstance(BrowserEnum.CHROME);
         DriverManager.setDriver(driver);
         driver.manage().window().maximize();
