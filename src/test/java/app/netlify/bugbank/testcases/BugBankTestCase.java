@@ -1,12 +1,15 @@
 package app.netlify.bugbank.testcases;
 
 //import app.netlify.bugbank.steps.AccountMovementStep;
+import app.netlify.bugbank.dto.UserDataDTO;
 import app.netlify.bugbank.steps.CreateAccountStep;
 //import app.netlify.bugbank.steps.TransferStep;
 import app.netlify.bugbank.utils.BaseTest;
 import app.netlify.bugbank.webdrivers.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
+
+import static app.netlify.bugbank.dto.UserDataDTO.*;
 
 public class BugBankTestCase extends BaseTest {
 
@@ -15,13 +18,15 @@ public class BugBankTestCase extends BaseTest {
     }
 
     @Test (
-            description = "Criar novas contas dos usuários.",
+            description = "Acessar na tela de login e criar novas contas dos usuários.",
             groups = {"web"},
             priority = 1
     )
-    public void registerTest() throws Exception {
-        CreateAccountStep register = new CreateAccountStep(driver());
+    public void registerTest() {
+        CreateAccountStep createAccountStep = new CreateAccountStep(driver());
+        createAccountStep.createNewUser(firstUserData().getEmail(), firstUserData().getName(), firstUserData().getPassword());
         driver().navigate().refresh();
+        createAccountStep.createNewUser(secondUserData().getEmail(), secondUserData().getName(), secondUserData().getPassword());
     }
 
     // @Test(
