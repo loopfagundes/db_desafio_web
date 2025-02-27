@@ -24,9 +24,8 @@ public class CreateAccountStep {
         validation = new Validation(_driver);
     }
 
-    public void createNewUser(String user, String createName, String nameProp, String dataUser, String decrypto) throws Exception {
-        SecureProperties.dataUser(user, createName, nameProp);
-        register(dataUser, decryptoEmail(decrypto), decryptoName(decrypto), decryptoPassword(decrypto));
+    public void createNewUser() throws Exception {
+        register();
     }
 
     private void register(String dataUser, String email, String name, String password) throws IOException {

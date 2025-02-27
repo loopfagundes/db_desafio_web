@@ -21,9 +21,7 @@ public class BugBankTestCase extends BaseTest {
     )
     public void registerTest() throws Exception {
         CreateAccountStep register = new CreateAccountStep(driver());
-        register.createNewUser("firstUser", "1_user_crypto", "1_user_crypto", "1_user", "1_user_crypto");
         driver().navigate().refresh();
-        register.createNewUser("secondUser", "2_user_crypto", "2_user_crypto", "2_user", "2_user_crypto");
     }
 
     @Test(
