@@ -2,6 +2,7 @@ package app.netlify.bugbank.testcases;
 
 //import app.netlify.bugbank.steps.AccountMovementStep;
 import app.netlify.bugbank.dto.UserDataDTO;
+import app.netlify.bugbank.dto.UserModelDTO;
 import app.netlify.bugbank.steps.CreateAccountStep;
 //import app.netlify.bugbank.steps.TransferStep;
 import app.netlify.bugbank.utils.BaseTest;
@@ -20,16 +21,21 @@ public class BugBankTestCase extends BaseTest {
     }
 
     @Test (
-            description = "Acessar na tela de login e criar novas contas dos usuários.",
+            description = "Acessa a tela de login e criar novas contas de usuários.",
             groups = {"web"},
             priority = 1
     )
     public void registerTest() throws IOException {
         CreateAccountStep createAccountStep = new CreateAccountStep(driver());
-        createAccountStep.createNewUser(firstUserData().getEmail(), firstUserData().getName(), firstUserData().getPassword(), "firstUser");
+        registerUser(createAccountStep, firstUserData(), "firstUser");
         driver().navigate().refresh();
-        createAccountStep.createNewUser(secondUserData().getEmail(), secondUserData().getName(), secondUserData().getPassword(), "secondUser");
+        registerUser(createAccountStep, secondUserData(), "secondUser");
     }
+
+    private void registerUser(CreateAccountStep createAccountStep, UserModelDTO userData, String userProp) throws IOException {
+        createAccountStep.createNewUser(userData.getEmail(), userData.getName(), userData.getPassword(), userProp);
+    }
+
 
     // @Test(
     //         description = "Realizada a transferência bancária.",
