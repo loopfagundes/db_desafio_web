@@ -4,12 +4,9 @@
  import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
  import app.netlify.bugbank.pageobjects.TransferPageObject;
  import app.netlify.bugbank.utils.Report;
- import app.netlify.bugbank.utils.TextUtils;
+ import app.netlify.bugbank.utils.ElementTextParser;
  import com.aventstack.extentreports.Status;
  import org.openqa.selenium.WebDriver;
- import org.testng.Assert;
-
- import java.io.IOException;
 
  public class Validation {
      private final CreateAccountPageObject createAccountPageObject;
@@ -23,7 +20,7 @@
      }
 
      public void createAccountSuccess() {
-         if (TextUtils.toReplaceAll(createAccountPageObject.createdSuccessfullyModalLabel()).equals("A conta  foi criada com sucesso")) {
+         if (ElementTextParser.toReplaceAll(createAccountPageObject.createdSuccessfullyModalLabel()).equals("A conta  foi criada com sucesso")) {
              Report.logCapture(Status.PASS, "O usuario foi criada com sucesso");
              createAccountPageObject.successCloseModalButton().click();
          } else {

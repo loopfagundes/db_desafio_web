@@ -9,4 +9,8 @@ public class LoggerFactory {
     public static void log_WARNING(String msg) {
         logger.log(Level.WARNING, msg);
     }
+
+    public static void log_INFO(String msg) {
+        logger.log(Level.INFO, msg);
+    }
 }

@@ -9,6 +9,8 @@ import app.netlify.bugbank.webdrivers.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 import static app.netlify.bugbank.dto.UserDataDTO.*;
 
 public class BugBankTestCase extends BaseTest {
@@ -22,11 +24,11 @@ public class BugBankTestCase extends BaseTest {
             groups = {"web"},
             priority = 1
     )
-    public void registerTest() {
+    public void registerTest() throws IOException {
         CreateAccountStep createAccountStep = new CreateAccountStep(driver());
-        createAccountStep.createNewUser(firstUserData().getEmail(), firstUserData().getName(), firstUserData().getPassword());
+        createAccountStep.createNewUser(firstUserData().getEmail(), firstUserData().getName(), firstUserData().getPassword(), "firstUser");
         driver().navigate().refresh();
-        createAccountStep.createNewUser(secondUserData().getEmail(), secondUserData().getName(), secondUserData().getPassword());
+        createAccountStep.createNewUser(secondUserData().getEmail(), secondUserData().getName(), secondUserData().getPassword(), "secondUser");
     }
 
     // @Test(
