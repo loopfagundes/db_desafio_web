@@ -15,7 +15,7 @@ public class BaseTest {
         DirectoryManager.resetFolder("main", "dataUser");
         WebDriver driver = DriverFactory.createInstance(BrowserEnum.CHROME);
         DriverManager.setDriver(driver);
-        driver.get(Property.get("url"));
+        driver.get(ConfigManager.get("url"));
     }
 
     @AfterTest

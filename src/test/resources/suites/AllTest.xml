@@ -2,7 +2,7 @@
 <suite name = "AllTest" verbose="1">
     <test name = "Teste de todos elementos.">
         <classes>
-            <class name="app.netlify.bugbank.testcases.BugBankTestCase"></class>
+            <class name="app.netlify.bugbank.testcases.BugBankTestCase"/>
         </classes>
     </test>
 </suite>
