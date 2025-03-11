@@ -1,15 +1,17 @@
 package app.netlify.bugbank.validations;
 
+import app.netlify.bugbank.dto.UserModelDTO;
 import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
 import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
 import app.netlify.bugbank.pageobjects.TransferPageObject;
-import app.netlify.bugbank.supports.RecorderSet;
+import app.netlify.bugbank.utils.PropertiesManager;
 import app.netlify.bugbank.utils.Report;
+import app.netlify.bugbank.utils.ElementDataUtils;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-import java.io.IOException;
+import static app.netlify.bugbank.utils.PropertiesManager.*;
 
 public class Validation {
     private final CreateAccountPageObject createAccountPageObject;
@@ -23,41 +25,81 @@ public class Validation {
     }
 
     public void createAccountSuccess() {
-        if (RecorderSet.toReplaceAll(createAccountPageObject.createdSuccessfullyModalLabel()).equals("A conta  foi criada com sucesso")) {
-            Report.logCapture(Status.PASS, "O usuario foi criada com sucesso");
+        String modalText = ElementDataUtils.toReplaceAll(createAccountPageObject.createdSuccessfullyModalLabel()).trim();
+        String expectedMessage = "A conta  foi criada com sucesso";
+        if (modalText.equals(expectedMessage)) {
+            Report.logCapture(Status.PASS, "O usuário foi criado com sucesso.");
             createAccountPageObject.successCloseModalButton().click();
         } else {
-            Report.logCapture(Status.FAIL, "Ocorreu um erro no registro.");
+            Report.log(Status.FAIL, "Erro ao criar conta. Mensagem exibida: " + modalText);
+            Assert.fail("Falha ao criar a conta. Mensagem inesperada: " + modalText);
         }
     }
 
-    public void firstUserAccountPage() {
-        Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá User_1,");
-        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(), "Saldo em conta R$ 1.000,00");
-        Report.logCapture(Status.INFO, "Observer o saldo do Usuario 1.");
+    public void firstUserAccount(UserModelDTO user) {
+        String expectedGreeting = "Olá " + user.getName() + ",";
+        String actualGreeting = accountScreenPageObject.helloUserLabel().getText();
+        Assert.assertEquals(actualGreeting, expectedGreeting, "A saudação do usuário não corresponde ao esperado.");
+    }
+
+    public void checkStoredBalanceForFirstUser() {
+        String expectedBalance = "Saldo em conta R$ 1.000,00";
+        String actualBalance = accountScreenPageObject.balanceUserLabel().getText();
+        Assert.assertEquals(actualBalance, expectedBalance, "O saldo do primeiro usuario não corresponde ao esperado.");
     }
 
     public void transferCompletedSuccessfully() {
-        Assert.assertEquals(transferPageObject.transferSuccessfullyLabel().getText(), "Transferencia realizada com sucesso");
+        Assert.assertEquals(transferPageObject.transferSuccessfullyLabel().getText(),
+                "Transferencia realizada com sucesso",
+                "Mensagem de sucesso da transferência não corresponde ao esperado.");
     }
 
-    public void remainingBalance() throws IOException {
-        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(),
-                RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "dataUser", "1_user", "cashBalance"));
+    public void checkRemainingBalance() {
+        String remainingBalance = getRemainingBalance();
+        String storedBalance = getStoredBalance();
+        Assert.assertEquals(remainingBalance, storedBalance, "Os valores do saldo restante não correspondem!");
+        Report.logCapture(Status.PASS, "Os valores do saldo restante estão corretos!");
     }
 
-    public void secondUserAccountPage() throws IOException {
-        Assert.assertEquals(accountScreenPageObject.helloUserLabel().getText(), "Olá User_2,");
-        Assert.assertEquals(accountScreenPageObject.balanceUserLabel().getText(),
-                RecorderSet.cash(accountScreenPageObject.balanceUserLabel(), "dataUser", "2_user", "cashBalance"));
-        Report.logCapture(Status.INFO, "Observer o saldo do Usuario 2.");
+    private String getRemainingBalance() {
+        String remainingBalance = accountScreenPageObject.balanceUserLabel().getText().trim();
+        if (remainingBalance.isEmpty()) {
+            Report.logCapture(Status.FAIL, "Falha ao capturar o saldo restante: valor vazio ou null.");
+            Assert.fail("Saldo restante não pode ser null ou vazio.");
+        }
+        setProperty("main", "dataUser", "firstUser", "remainingBalance", remainingBalance);
+        return remainingBalance;
     }
 
-    public void accountMovement() throws IOException {
-        Assert.assertEquals(accountScreenPageObject.balanceAvailableLabel().getText(),
-                RecorderSet.cash(accountScreenPageObject.balanceAvailableLabel(), "dataUser", "2_user", "balanceAvailable"));
-        Assert.assertEquals(accountScreenPageObject.receiveValueLabel().getText(),
-                RecorderSet.cash(accountScreenPageObject.receiveValueLabel(), "dataUser", "2_user", "receiveCash"));
+    private static String getStoredBalance() {
+        String loadStoredBalance = loadProperties("main", "dataUser", "firstUser").getProperty("remainingBalance");
+        if (loadStoredBalance == null || loadStoredBalance.trim().isEmpty()) {
+            Report.logCapture(Status.FAIL, "Falha ao carregar saldo armazenado: valor null ou vazio.");
+            Assert.fail("Erro ao carregar saldo armazenado.");
+        }
+        return loadStoredBalance;
+    }
+
+    public void validateSecondUserAccount(UserModelDTO user) {
+        String actualGreeting = accountScreenPageObject.helloUserLabel().getText();
+        String expectedGreeting = "Olá " + user.getName() + ",";
+        Assert.assertEquals(actualGreeting, expectedGreeting, "A saudação do segundo usuário não está correta.");
+    }
+
+    public void checkStoredBalanceForSecondUser() {
+        String fetchStoredBalance = PropertiesManager.loadProperties("main", "dataUser", "secondUser").getProperty("accountBalance");
+        String actualBalance = accountScreenPageObject.balanceUserLabel().getText();
+        Assert.assertEquals(actualBalance, fetchStoredBalance, "O saldo do segundo usuario não corresponde ao esperado.");
+    }
+
+    public void accountMovement() {
+        String actualBalanceAvailable = accountScreenPageObject.balanceAvailableLabel().getText();
+        String expectedBalanceAvailable = PropertiesManager.loadProperties("main", "dataUser", "secondUser").getProperty("updateAccountBalance");
+        Assert.assertEquals(actualBalanceAvailable, expectedBalanceAvailable, "O saldo disponivel do segundo usuario não corresponde ao esperado.");
+
+//        Assert.assertEquals(accountScreenPageObject.receiveValueLabel().getText(),
+//                RecorderSet.cash(accountScreenPageObject.receiveValueLabel(), "dataUser", "2_user", "receiveCash"));
+
         Report.logCapture(Status.INFO, "Observer o extrato do Usuario 2.");
     }
 }

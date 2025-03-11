@@ -12,15 +12,14 @@ public class BaseTest {
 
     @BeforeTest
     public void setUp() {
-        DirectoryOperation.OperationFolder();
+        DirectoryManager.resetFolder("main", "dataUser");
         WebDriver driver = DriverFactory.createInstance(BrowserEnum.CHROME);
         DriverManager.setDriver(driver);
-        driver.manage().window().maximize();
         driver.get(Property.get("url"));
     }
 
     @AfterTest
     public void tearDown() {
-        DriverManager.quitDriver();
+       DriverManager.quitDriver();
     }
 }

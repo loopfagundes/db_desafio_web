@@ -22,6 +22,6 @@ public class Property {
         if(Objects.nonNull(System.getProperty(".env"))) {
             return System.getProperty("env");
         }
-        return "configuration/dev";
+        return "configuration/url";
     }
 }

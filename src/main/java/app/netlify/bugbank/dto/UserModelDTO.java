@@ -1,20 +1,20 @@
-package app.netlify.bugbank.data;
+package app.netlify.bugbank.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class UserModel {
+public class UserModelDTO {
     String email;
     String name;
     String password;
 
-    public UserModel() {
+    public UserModelDTO() {
 
     }
 
-    public UserModel(String email, String name, String password) {
+    public UserModelDTO(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;

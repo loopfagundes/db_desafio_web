@@ -40,6 +40,10 @@ public class TransferPageObject {
         return wait.visibilityOf(By.id("modalText"));
     }
 
+    public WebElement backPageButton() {
+        return wait.toBeClickable(By.id("btnBack"));
+    }
+
     public WebElement closeModalButton() {
         return wait.toBeClickable(By.id("btnCloseModal"));
     }

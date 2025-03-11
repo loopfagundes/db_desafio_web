@@ -1,12 +1,16 @@
 package app.netlify.bugbank.testcases;
 
+import app.netlify.bugbank.dto.UserModelDTO;
 import app.netlify.bugbank.steps.AccountMovementStep;
 import app.netlify.bugbank.steps.CreateAccountStep;
+import app.netlify.bugbank.steps.LoginStep;
 import app.netlify.bugbank.steps.TransferStep;
 import app.netlify.bugbank.utils.BaseTest;
 import app.netlify.bugbank.webdrivers.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
+
+import static app.netlify.bugbank.dto.UserDataDTO.*;
 
 public class BugBankTestCase extends BaseTest {
 
@@ -14,35 +18,54 @@ public class BugBankTestCase extends BaseTest {
         return DriverManager.getDriver();
     }
 
-    @Test (
-            description = "Criar novas contas dos usuários.",
+    @Test(
+            description = "Acessa a tela de login e criar novas contas de usuários.",
             groups = {"web"},
             priority = 1
     )
-    public void registerTest() throws Exception {
-        CreateAccountStep register = new CreateAccountStep(driver());
-        register.createNewUser("firstUser", "1_user_crypto", "1_user_crypto", "1_user", "1_user_crypto");
+    public void registerTest() {
+        CreateAccountStep createAccountStep = new CreateAccountStep(driver());
+        registerUser(createAccountStep, firstUserData(), "firstUser");
         driver().navigate().refresh();
-        register.createNewUser("secondUser", "2_user_crypto", "2_user_crypto", "2_user", "2_user_crypto");
+        registerUser(createAccountStep, secondUserData(), "secondUser");
+    }
+
+    private void registerUser(CreateAccountStep createAccountStep, UserModelDTO userData, String userProp) {
+        createAccountStep.createNewUser(userData.getEmail(), userData.getName(), userData.getPassword(), userProp);
+    }
+
+    @Test(
+            description = "Efetue o login do usuário primeiro",
+            groups = {"web"},
+            priority = 2)
+    public void loginFirstUserTest() {
+        new LoginStep(driver()).performUserLoginFirst();
     }
 
     @Test(
             description = "Realizada a transferência bancária.",
             groups = {"web"},
-            priority = 2
-    )
-    public void transferTest() throws Exception {
-        TransferStep transfer = new TransferStep(driver());
-        transfer.makeTransfer();
-    }
-
-    @Test (
-            description = "Receber o saldo da transferência.",
-            groups = {"web"},
             priority = 3
     )
-    public void receiveTheBalanceTest() throws Exception {
-        AccountMovementStep accountMovement = new AccountMovementStep(driver());
-        accountMovement.receiveTheBalance();
+    public void transferTest() {
+        new TransferStep(driver()).makeTransfer();
     }
+
+    @Test(
+            description = "Efetue o login do usuário segundo",
+            groups = {"web"},
+            priority = 4)
+    public void loginSecondUserTest() {
+        new LoginStep(driver()).performUserLoginSecond();
+    }
+
+     @Test (
+             description = "Receber o saldo da transferência.",
+             groups = {"web"},
+             priority = 5
+     )
+     public void accountMovementTest() {
+         AccountMovementStep accountMovement = new AccountMovementStep(driver());
+         accountMovement.processAccountBalance();
+     }
 }

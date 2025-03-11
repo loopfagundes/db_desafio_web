@@ -32,10 +32,6 @@ public class AccountScreenPageObject {
         return wait.visibilityOf(By.id("textBalance"));
     }
 
-    public WebElement backPageButton() {
-        return wait.toBeClickable(By.id("btnBack"));
-    }
-
     public WebElement exitAccountButton() {
         return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[1]/div"));
     }
@@ -48,7 +44,7 @@ public class AccountScreenPageObject {
         return wait.visibilityOf(By.id("textBalanceAvailable"));
     }
 
-    public WebElement receiveValueLabel() {
+    public WebElement amountToReceiveLabel() {
         return wait.visibilityOf(By.xpath("//*[@type='input'][@id='textTransferValue']"));
     }
 }
