@@ -34,25 +34,28 @@ public class BugBankTestCase extends BaseTest {
     }
 
     @Test(
-            description = "Efetura login",
+            description = "Efetue o login do usuário primeiro",
             groups = {"web"},
-            priority = 2
-    )
-    public void loginTest() {
-        LoginStep loginStep = new LoginStep(driver());
-        loginStep.performLogin();
+            priority = 2)
+    public void loginFirstUserTest() {
+        new LoginStep(driver()).performUserLoginFirst();
     }
-
-
 
     @Test(
             description = "Realizada a transferência bancária.",
             groups = {"web"},
             priority = 3
     )
-    public void transferTest() throws Exception {
-        TransferStep transfer = new TransferStep(driver());
-        transfer.makeTransfer();
+    public void transferTest() {
+        new TransferStep(driver()).makeTransfer();
+    }
+
+    @Test(
+            description = "Efetue o login do usuário segundo",
+            groups = {"web"},
+            priority = 4)
+    public void loginSecondUserTest() {
+        new LoginStep(driver()).performUserLoginSecond();
     }
 
     // @Test (
