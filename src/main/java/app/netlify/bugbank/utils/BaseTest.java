@@ -15,7 +15,6 @@ public class BaseTest {
         DirectoryManager.resetFolder("main", "dataUser");
         WebDriver driver = DriverFactory.createInstance(BrowserEnum.CHROME);
         DriverManager.setDriver(driver);
-        driver.manage().window().maximize();
         driver.get(Property.get("url"));
     }
 

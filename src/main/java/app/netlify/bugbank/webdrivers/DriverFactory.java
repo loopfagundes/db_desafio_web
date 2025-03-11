@@ -1,41 +1,94 @@
 package app.netlify.bugbank.webdrivers;
 
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.service.ExtentTestManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverFactory {
+    private static boolean isHeadless;
+
     public static WebDriver createInstance(BrowserEnum browser) {
+        String headless = System.getProperty("headless", "false").toLowerCase();
+        if (headless.equals("true") || headless.equals("false")) {
+            isHeadless = Boolean.parseBoolean(headless);
+        } else {
+            throw new IllegalArgumentException(
+                    "O parâmetro 'headless' aceita apenas valores booleanos: true ou false.");
+        }
+
         try {
             switch (browser) {
                 case FIREFOX:
                     WebDriverManager.firefoxdriver().setup();
-                    return new FirefoxDriver();
+                    FirefoxOptions firefoxOptions = getFirefoxOptions();
+                    return new FirefoxDriver(firefoxOptions);
                 case CHROME:
                     WebDriverManager.chromedriver().setup();
-                    return new ChromeDriver();
+                    ChromeOptions chromeOptions = getChromeOptions();
+                    return new ChromeDriver(chromeOptions);
                 case EDGE:
                     WebDriverManager.edgedriver().setup();
-                    return new EdgeDriver();
+                    EdgeOptions edgeOptions = getEdgeOptions();
+                    return new EdgeDriver(edgeOptions);
                 default:
-                    String message = "DriverFactory.getInstance() recebeu um argumento invalido";
-                    ExtentTestManager.getTest().log(Status.FAIL, message);
-                    throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException("Navegador inválido:" + browser);
             }
         } catch (SessionNotCreatedException e) {
-            String message = "Sessao dao criada, versao do driver nao suportada.";
-            ExtentTestManager.getTest().log(Status.FAIL, message);
-            throw new SessionNotCreatedException(message, e);
+            throw new SessionNotCreatedException("Sessão não criada, versão de driver não suportada.", e);
         } catch (WebDriverException e) {
-            String message = "Nao foi possivel encontrar o binario do driver.";
-            ExtentTestManager.getTest().log(Status.FAIL, message);
-            throw new WebDriverException(message, e);
+            throw new WebDriverException("Não foi possível encontrar o binário do driver.", e);
         }
+    }
+
+    private static FirefoxOptions getFirefoxOptions() {
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.addArguments("--start-maximized");
+        firefoxOptions.addArguments("--disable-extensions");
+        firefoxOptions.addArguments("--disable-infobars");
+        firefoxOptions.addArguments("--disable-notifications");
+        firefoxOptions.addArguments("--ignored-certificates-errors");
+        if (isHeadless) {
+            firefoxOptions.addArguments("--headless");
+        }
+        return firefoxOptions;
+    }
+
+    private static ChromeOptions getChromeOptions() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--start-maximized");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.addArguments("--disable-extensions");
+        chromeOptions.addArguments("--disable-infobars");
+        chromeOptions.addArguments("--disable-notifications");
+        chromeOptions.addArguments("--remote-allow-origins=*");
+        chromeOptions.addArguments("--ignored-certificates-errors");
+        if (isHeadless) {
+            chromeOptions.addArguments("--headless");
+        }
+        return chromeOptions;
+    }
+
+    private static EdgeOptions getEdgeOptions() {
+        EdgeOptions edgeOptions = new EdgeOptions();
+        edgeOptions.addArguments("--start-maximized");
+        edgeOptions.addArguments("--no-sandbox");
+        edgeOptions.addArguments("--disable-dev-shm-usage");
+        edgeOptions.addArguments("--disable-extensions");
+        edgeOptions.addArguments("--disable-infobars");
+        edgeOptions.addArguments("--disable-notifications");
+        edgeOptions.addArguments("--remote-allow-origins=*");
+        edgeOptions.addArguments("--ignored-certificates-errors");
+        if (isHeadless) {
+            edgeOptions.addArguments("--headless");
+        }
+        return edgeOptions;
     }
 }

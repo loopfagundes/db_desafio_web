@@ -14,6 +14,6 @@ public class UserDataDTO {
         dto.setEmail("user_2@test.com");
         dto.setName("User_2");
         dto.setPassword("secret");
-        return new UserModelDTO(dto.getEmail(), dto.getName(), dto.getPassword()); 
+        return new UserModelDTO(dto.getEmail(), dto.getName(), dto.getPassword());
     }
 }

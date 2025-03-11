@@ -1,77 +1,77 @@
-// package app.netlify.bugbank.steps;
+package app.netlify.bugbank.steps;
 
-// import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
-// import app.netlify.bugbank.pageobjects.TransferPageObject;
-// import app.netlify.bugbank.supports.RecorderSet;
-// import app.netlify.bugbank.utils.Report;
-// import app.netlify.bugbank.validations.Validation;
-// import com.aventstack.extentreports.Status;
-// import org.openqa.selenium.WebDriver;
+import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
+import app.netlify.bugbank.pageobjects.TransferPageObject;
+import app.netlify.bugbank.utils.ElementDataUtils;
+import app.netlify.bugbank.utils.Report;
+import app.netlify.bugbank.validations.Validation;
+import com.aventstack.extentreports.Status;
+import org.openqa.selenium.WebDriver;
 
-// import java.io.IOException;
+import java.util.Properties;
 
-// import static app.netlify.bugbank.supports.RecorderGet.getDataUser;
-// import static app.netlify.bugbank.security.DecrytData.*;
+import static app.netlify.bugbank.utils.PropertiesManager.*;
 
-// public class TransferStep {
-//     private final AccountScreenPageObject accountScreenPageObject;
-//     private final TransferPageObject transferPageObject;
-//     private final Validation validation;
+public class TransferStep {
+    private final AccountScreenPageObject accountScreenPageObject;
+    private final TransferPageObject transferPageObject;
+    private final Validation validation;
 
-//     public TransferStep(WebDriver driver) {
-//         accountScreenPageObject = new AccountScreenPageObject(driver);
-//         transferPageObject = new TransferPageObject(driver);
-//         validation = new Validation(driver);
-//     }
+    public TransferStep(WebDriver driver) {
+        accountScreenPageObject = new AccountScreenPageObject(driver);
+        transferPageObject = new TransferPageObject(driver);
+        validation = new Validation(driver);
+    }
 
-//     public void makeTransfer() throws Exception {
-//         login(decryptoEmail("1_user_crypto"), decryptoPassword("1_user_crypto"));
-//         transferBankBalance();
-//     }
+    public void makeTransfer() {
+        validation.firstUserInAccount();
+        extractBalance();
+        transferBankBalance();
+        exitAccount();
+    }
 
-//     private void login(String email, String password) {
-//         Report.log(Status.INFO, "Acessar a conta primeiro do usuario");
-//         accountScreenPageObject.emailTextField().sendKeys(email);
-//         accountScreenPageObject.passwordTextField().sendKeys(password);
-//         accountScreenPageObject.accessAccountButton().click();
-//         validation.firstUserAccountPage();
-//     }
+    private void transferBankBalance() {
+        fillInTransferFields(loadProp());
+        transferCompletedSuccessfully();
+        validation.remainingBalance();
+    }
 
-//     private void transferBankBalance() throws IOException {
-//         Report.log(Status.INFO, "Pagina da minha conta e realizar a transferência");
-//         transferPageObject.transferButton().click();
-//         fillInTransferFields();
-//         transferCompletedSuccessfully();
-//         accountScreenPageObject.backPageButton().click();
-//         validation.remainingBalance();
-//         exitAccount();
-//     }
+    private void extractBalance() {
+        ElementDataUtils.cash(accountScreenPageObject.balanceUserLabel(), "dataUser", "firstUser", "cashBalance");
+    }
 
-//     private void fillInTransferFields() throws IOException {
-//         transferPageObject.numberAccountTextField().sendKeys(getDataUser("dataUser", "2_user", "accountNumber"));
-//         transferPageObject.digitTextField().sendKeys(getDataUser("dataUser", "2_user", "digit"));
-//         RecorderSet.fakeValue(transferPageObject.transferAmountTextField(), "dataUser", "1_user", "value");
-//         transferPageObject.descriptionTextField().sendKeys("balance transfer.");
-//         Report.logCapture(Status.INFO, "Observer nos campos de transferencia.");
-//     }
+    private Properties loadProp() {
+        return loadProperties("main", "dataUser", "secondUser");
+    }
 
-//     private void transferCompletedSuccessfully() {
-//         if (!transferPageObject.transferNowButton().isSelected()) {
-//             transferPageObject.transferNowButton().click();
-//             validation.transferCompletedSuccessfully();
-//             Report.logCapture(Status.PASS, "Transferencia realizada com sucesso.");
-//         } else {
-//             Report.logCapture(Status.FAIL, "Ocorreu um erro na transferencia.");
-//         }
-//         transferPageObject.closeModalButton().click();
-//     }
+    private void fillInTransferFields(Properties userProperties) {
+        transferPageObject.transferButton().click();
+        Report.logCapture(Status.INFO, "Redirecionado para pagina de transferencia");
+        transferPageObject.numberAccountTextField().sendKeys(userProperties.getProperty("account"));
+        transferPageObject.digitTextField().sendKeys(userProperties.getProperty("digit"));
+        ElementDataUtils.fakeValue(transferPageObject.transferAmountTextField(), "dataUser", "firstUser", "moneyTransferred");
+        transferPageObject.descriptionTextField().sendKeys("balance transfer.");
+        Report.logCapture(Status.INFO, "Preenchendo os campos do formulário. ");
+    }
 
-//     private void exitAccount() {
-//         if (!accountScreenPageObject.exitAccountButton().isSelected()) {
-//             accountScreenPageObject.exitAccountButton().click();
-//             Report.logCapture(Status.PASS, "O primeiro usuario saiu da conta com sucesso.");
-//         } else {
-//             Report.logCapture(Status.FAIL, "Não saiu da conta.");
-//         }
-//     }
-// }
+    private void transferCompletedSuccessfully() {
+        if (transferPageObject.transferNowButton().isDisplayed()) {
+            transferPageObject.transferNowButton().click();
+            validation.transferCompletedSuccessfully();
+            Report.logCapture(Status.PASS, "Transferência realizada com sucesso.");
+        } else {
+            Report.logCapture(Status.FAIL, "Erro ao realizar a transferência: botão não disponível.");
+        }
+        transferPageObject.closeModalButton().click();
+        transferPageObject.backPageButton().click();
+    }
+
+    private void exitAccount() {
+        if (accountScreenPageObject.exitAccountButton().isDisplayed()) {
+            accountScreenPageObject.exitAccountButton().click();
+            Report.logCapture(Status.PASS, "Usuário saiu da conta com sucesso.");
+        } else {
+            Report.logCapture(Status.FAIL, "Erro ao sair da conta.");
+        }
+    }
+}
