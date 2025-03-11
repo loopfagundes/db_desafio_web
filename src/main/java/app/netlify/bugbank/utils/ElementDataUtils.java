@@ -32,7 +32,7 @@ public class ElementDataUtils {
         PropertiesManager.setProperty(DEFALUT_DIRECTORY, nameFolder, fileName, key, fakeValue);
     }
 
-    public static void cash(WebElement element, String nameFolder, String fileName, String key) {
+    public static void extractAndStore(WebElement element, String nameFolder, String fileName, String key) {
         if (element == null) {
             throw new IllegalArgumentException("O elemento WebElement não pode ser null.");
         }

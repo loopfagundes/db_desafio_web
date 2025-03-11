@@ -1,46 +1,48 @@
-// package app.netlify.bugbank.steps;
+ package app.netlify.bugbank.steps;
 
-// import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
-// import app.netlify.bugbank.utils.Report;
-// import app.netlify.bugbank.validations.Validation;
-// import com.aventstack.extentreports.Status;
-// import org.openqa.selenium.WebDriver;
+ import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
+ import app.netlify.bugbank.utils.ElementDataUtils;
+ import app.netlify.bugbank.utils.Report;
+ import app.netlify.bugbank.validations.Validation;
+ import com.aventstack.extentreports.Status;
+ import org.openqa.selenium.WebDriver;
 
-// import java.io.IOException;
+ public class AccountMovementStep {
+     private final AccountScreenPageObject accountScreenPageObject;
+     private final Validation validation;
 
-// import static app.netlify.bugbank.security.DecrytData.*;
+     public AccountMovementStep(WebDriver driver) {
+         accountScreenPageObject = new AccountScreenPageObject(driver);
+         validation = new Validation(driver);
+     }
 
-// public class AccountMovementStep {
-//     private final AccountScreenPageObject accountScreenPageObject;
-//     private final Validation validation;
+     public void processAccountBalance() {
+         bankStatement();
+         checkBalanceAvailability();
+         amountToReceive();
+         validation.accountMovement();
+         logoutAccount();
+     }
 
-//     public AccountMovementStep(WebDriver driver) {
-//         accountScreenPageObject = new AccountScreenPageObject(driver);
-//         validation = new Validation(driver);
-//     }
+     private void bankStatement() {
+         Report.log(Status.INFO, "Movimento bancária do usuario");
+         accountScreenPageObject.balanceStatementButton().click();
+     }
 
-//     public void receiveTheBalance() throws Exception {
-//         login(decryptoEmail("2_user_crypto"), decryptoPassword("2_user_crypto"));
-//         bankStatement();
-//     }
+     private void checkBalanceAvailability() {
+         ElementDataUtils.extractAndStore(accountScreenPageObject.balanceAvailableLabel(), "dataUser", "secondUser", "updateAccountBalance");
+     }
 
-//     private void login(String emailSecond, String passwordUserSecond) throws IOException {
-//         Report.log(Status.INFO, "O segundo do usuario acessar na conta.");
-//         accountScreenPageObject.emailTextField().sendKeys(emailSecond);
-//         accountScreenPageObject.passwordTextField().sendKeys(passwordUserSecond);
-//         accountScreenPageObject.accessAccountButton().click();
-//         validation.secondUserAccountPage();
-//     }
+     private void amountToReceive() {
+         ElementDataUtils.extractAndStore(accountScreenPageObject.amountToReceiveLabel(), "dataUser", "secondUser", "amountToReceive");
+     }
 
-//     private void bankStatement() throws IOException {
-//         Report.log(Status.INFO, "Movimento bancária do usuario");
-//         accountScreenPageObject.balanceStatementButton().click();
-//         validation.accountMovement();
-//         if (!accountScreenPageObject.exitAccountButton().isSelected()) {
-//             accountScreenPageObject.exitAccountButton().click();
-//             Report.logCapture(Status.PASS, "O segundo usuario saiu da conta com sucesso.");
-//         } else {
-//             Report.logCapture(Status.FAIL, "Não saiu da conta.");
-//         }
-//     }
-// }
+     private void logoutAccount() {
+         if (accountScreenPageObject.exitAccountButton().isDisplayed()) {
+             accountScreenPageObject.exitAccountButton().click();
+             Report.logCapture(Status.PASS, "O segundo usuario saiu da conta com sucesso.");
+         } else {
+             Report.logCapture(Status.FAIL, "Não saiu da conta.");
+         }
+     }
+ }

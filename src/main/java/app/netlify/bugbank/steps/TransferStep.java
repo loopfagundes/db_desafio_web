@@ -24,20 +24,14 @@ public class TransferStep {
     }
 
     public void makeTransfer() {
-        validation.firstUserInAccount();
-        extractBalance();
-        transferBankBalance();
-        exitAccount();
+        processBankTransfer();
+        logoutAccount();
     }
 
-    private void transferBankBalance() {
+    private void processBankTransfer() {
         fillInTransferFields(loadProp());
-        transferCompletedSuccessfully();
-        validation.remainingBalance();
-    }
-
-    private void extractBalance() {
-        ElementDataUtils.cash(accountScreenPageObject.balanceUserLabel(), "dataUser", "firstUser", "cashBalance");
+        confirmTransferSuccess();
+        validation.checkRemainingBalance();
     }
 
     private Properties loadProp() {
@@ -54,7 +48,7 @@ public class TransferStep {
         Report.logCapture(Status.INFO, "Preenchendo os campos do formulário. ");
     }
 
-    private void transferCompletedSuccessfully() {
+    private void confirmTransferSuccess() {
         if (transferPageObject.transferNowButton().isDisplayed()) {
             transferPageObject.transferNowButton().click();
             validation.transferCompletedSuccessfully();
@@ -66,7 +60,7 @@ public class TransferStep {
         transferPageObject.backPageButton().click();
     }
 
-    private void exitAccount() {
+    private void logoutAccount() {
         if (accountScreenPageObject.exitAccountButton().isDisplayed()) {
             accountScreenPageObject.exitAccountButton().click();
             Report.logCapture(Status.PASS, "Usuário saiu da conta com sucesso.");

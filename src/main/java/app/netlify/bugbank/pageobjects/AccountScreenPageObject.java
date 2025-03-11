@@ -44,7 +44,7 @@ public class AccountScreenPageObject {
         return wait.visibilityOf(By.id("textBalanceAvailable"));
     }
 
-    public WebElement receiveValueLabel() {
+    public WebElement amountToReceiveLabel() {
         return wait.visibilityOf(By.xpath("//*[@type='input'][@id='textTransferValue']"));
     }
 }

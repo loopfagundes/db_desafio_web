@@ -20,6 +20,6 @@ public class BaseTest {
 
     @AfterTest
     public void tearDown() {
-        DriverManager.quitDriver();
+       DriverManager.quitDriver();
     }
 }

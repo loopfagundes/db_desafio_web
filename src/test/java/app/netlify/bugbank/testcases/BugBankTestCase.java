@@ -1,6 +1,7 @@
 package app.netlify.bugbank.testcases;
 
 import app.netlify.bugbank.dto.UserModelDTO;
+import app.netlify.bugbank.steps.AccountMovementStep;
 import app.netlify.bugbank.steps.CreateAccountStep;
 import app.netlify.bugbank.steps.LoginStep;
 import app.netlify.bugbank.steps.TransferStep;
@@ -58,13 +59,13 @@ public class BugBankTestCase extends BaseTest {
         new LoginStep(driver()).performUserLoginSecond();
     }
 
-    // @Test (
-    //         description = "Receber o saldo da transferência.",
-    //         groups = {"web"},
-    //         priority = 4
-    // )
-    // public void receiveTheBalanceTest() throws Exception {
-    //     AccountMovementStep accountMovement = new AccountMovementStep(driver());
-    //     accountMovement.receiveTheBalance();
-    // }
+     @Test (
+             description = "Receber o saldo da transferência.",
+             groups = {"web"},
+             priority = 5
+     )
+     public void accountMovementTest() {
+         AccountMovementStep accountMovement = new AccountMovementStep(driver());
+         accountMovement.processAccountBalance();
+     }
 }
