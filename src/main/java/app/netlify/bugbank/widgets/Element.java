@@ -22,7 +22,7 @@ public class Element {
         }
     }
 
-    public void jsClick(WebDriver driver, WebElement locator) {
+    public static void jsClick(WebDriver driver, WebElement locator) {
         try {
             JavascriptExecutor jse = (JavascriptExecutor) driver;
             jse.executeScript("arguments[0].click();", locator);

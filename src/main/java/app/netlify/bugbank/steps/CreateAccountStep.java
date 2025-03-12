@@ -5,6 +5,8 @@ import app.netlify.bugbank.utils.ElementDataUtils;
 import app.netlify.bugbank.utils.JsExecutor;
 import app.netlify.bugbank.utils.Report;
 import app.netlify.bugbank.validations.Validation;
+import app.netlify.bugbank.widgets.Element;
+
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 
@@ -25,7 +27,7 @@ public class CreateAccountStep {
 
     private void registerUser(String email, String name, String password, String userProp) {
         Report.log(Status.INFO, "Iniciando cadastro de novo usuário.");
-        createAccountPage.registerButton().click();
+        Element.click(createAccountPage.registerButton());
         fillRegistrationFields(email, name, password);
         submitRegistration();
         parseAccountData(userProp);
@@ -40,7 +42,8 @@ public class CreateAccountStep {
     }
 
     private void submitRegistration() {
-        JsExecutor.click(driver, createAccountPage.balanceAccountButton());
+        //JsExecutor.click(driver, createAccountPage.balanceAccountButton());
+        Element.jsClick(driver, createAccountPage.balanceAccountButton());
         createAccountPage.registerAccountButton().click();
     }
 
