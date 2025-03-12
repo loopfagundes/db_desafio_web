@@ -2,7 +2,6 @@ package app.netlify.bugbank.steps;
 
 import app.netlify.bugbank.pageobjects.CreateAccountPageObject;
 import app.netlify.bugbank.utils.ElementDataUtils;
-import app.netlify.bugbank.utils.JsExecutor;
 import app.netlify.bugbank.utils.Report;
 import app.netlify.bugbank.validations.Validation;
 import app.netlify.bugbank.widgets.Element;
