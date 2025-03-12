@@ -29,6 +29,7 @@ public class CreateAccountStep {
         Report.log(Status.INFO, "Iniciando cadastro de novo usuário.");
         Element.click(createAccountPage.registerButton());
         fillRegistrationFields(email, name, password);
+        addBalanceToAccount();
         submitRegistration();
         parseAccountData(userProp);
         validation.createAccountSuccess();
@@ -41,10 +42,12 @@ public class CreateAccountStep {
         createAccountPage.confirmationPasswordTextField().sendKeys(password);
     }
 
-    private void submitRegistration() {
-        //JsExecutor.click(driver, createAccountPage.balanceAccountButton());
+    private void addBalanceToAccount() {
         Element.jsClick(driver, createAccountPage.balanceAccountButton());
-        createAccountPage.registerAccountButton().click();
+    }
+
+    private void submitRegistration() {
+        Element.click(createAccountPage.registerAccountButton());
     }
 
     private void parseAccountData(String userProp) {
