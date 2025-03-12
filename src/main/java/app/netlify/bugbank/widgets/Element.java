@@ -6,7 +6,6 @@ import org.openqa.selenium.*;
 import org.testng.Assert;
 
 public class Element {
-    private WebDriver driver = null;
 
     public static void click(WebElement locator) {
         try {
