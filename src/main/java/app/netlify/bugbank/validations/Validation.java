@@ -25,11 +25,11 @@ public class Validation {
     }
 
     public void createAccountSuccess() {
-        String modalText = ElementDataUtils.toReplaceAll(createAccountPageObject.createdSuccessfullyModalLabel()).trim();
+        String modalText = ElementDataUtils.toReplaceAll(createAccountPageObject.successModalLabel()).trim();
         String expectedMessage = "A conta  foi criada com sucesso";
         if (modalText.equals(expectedMessage)) {
             Report.logCapture(Status.PASS, "O usuário foi criado com sucesso.");
-            createAccountPageObject.successCloseModalButton().click();
+            createAccountPageObject.closeSuccessModalButton().click();
         } else {
             Report.log(Status.FAIL, "Erro ao criar conta. Mensagem exibida: " + modalText);
             Assert.fail("Falha ao criar a conta. Mensagem inesperada: " + modalText);
@@ -38,18 +38,18 @@ public class Validation {
 
     public void firstUserAccount(UserModelDTO user) {
         String expectedGreeting = "Olá " + user.getName() + ",";
-        String actualGreeting = accountScreenPageObject.helloUserLabel().getText();
+        String actualGreeting = accountScreenPageObject.userGreetingLabel().getText();
         Assert.assertEquals(actualGreeting, expectedGreeting, "A saudação do usuário não corresponde ao esperado.");
     }
 
     public void checkStoredBalanceForFirstUser() {
         String expectedBalance = "Saldo em conta R$ 1.000,00";
-        String actualBalance = accountScreenPageObject.balanceUserLabel().getText();
+        String actualBalance = accountScreenPageObject.userBalanceLabel().getText();
         Assert.assertEquals(actualBalance, expectedBalance, "O saldo do primeiro usuario não corresponde ao esperado.");
     }
 
     public void transferCompletedSuccessfully() {
-        Assert.assertEquals(transferPageObject.transferSuccessfullyLabel().getText(),
+        Assert.assertEquals(transferPageObject.transferSuccessLabel().getText(),
                 "Transferencia realizada com sucesso",
                 "Mensagem de sucesso da transferência não corresponde ao esperado.");
     }
@@ -62,7 +62,7 @@ public class Validation {
     }
 
     private String getRemainingBalance() {
-        String remainingBalance = accountScreenPageObject.balanceUserLabel().getText().trim();
+        String remainingBalance = accountScreenPageObject.userBalanceLabel().getText().trim();
         if (remainingBalance.isEmpty()) {
             Report.logCapture(Status.FAIL, "Falha ao capturar o saldo restante: valor vazio ou null.");
             Assert.fail("Saldo restante não pode ser null ou vazio.");
@@ -81,14 +81,14 @@ public class Validation {
     }
 
     public void validateSecondUserAccount(UserModelDTO user) {
-        String actualGreeting = accountScreenPageObject.helloUserLabel().getText();
+        String actualGreeting = accountScreenPageObject.userGreetingLabel().getText();
         String expectedGreeting = "Olá " + user.getName() + ",";
         Assert.assertEquals(actualGreeting, expectedGreeting, "A saudação do segundo usuário não está correta.");
     }
 
     public void checkStoredBalanceForSecondUser() {
         String fetchStoredBalance = PropertiesManager.loadProperties("main", "dataUser", "secondUser").getProperty("accountBalance");
-        String actualBalance = accountScreenPageObject.balanceUserLabel().getText();
+        String actualBalance = accountScreenPageObject.userBalanceLabel().getText();
         Assert.assertEquals(actualBalance, fetchStoredBalance, "O saldo do segundo usuario não corresponde ao esperado.");
     }
 

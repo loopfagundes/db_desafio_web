@@ -24,15 +24,15 @@ public class AccountScreenPageObject {
         return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[1]/form/div[3]/button[1]"));
     }
 
-    public WebElement helloUserLabel() {
+    public WebElement userGreetingLabel() {
         return wait.visibilityOf(By.id("textName"));
     }
 
-    public WebElement balanceUserLabel() {
+    public WebElement userBalanceLabel() {
         return wait.visibilityOf(By.id("textBalance"));
     }
 
-    public WebElement exitAccountButton() {
+    public WebElement logoutButton() {
         return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[1]/div"));
     }
 
@@ -44,7 +44,7 @@ public class AccountScreenPageObject {
         return wait.visibilityOf(By.id("textBalanceAvailable"));
     }
 
-    public WebElement amountToReceiveLabel() {
+    public WebElement pendingAmountLabel() {
         return wait.visibilityOf(By.xpath("//*[@type='input'][@id='textTransferValue']"));
     }
 }

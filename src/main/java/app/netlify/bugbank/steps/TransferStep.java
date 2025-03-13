@@ -27,14 +27,14 @@ public class TransferStep {
 
     public void makeTransfer() {
         processBankTransfer();
-        signOut();
+        logoutUser();
     }
 
     private void processBankTransfer() {
         accessTransfer();
         fillInTransferFields(loadProp());
-        confirmTransferSuccess();
-        dismissTransferModal();
+        submitTransfer();
+        closeModal();
         returnToPreviousPage();
         validation.checkRemainingBalance();
     }
@@ -56,20 +56,20 @@ public class TransferStep {
         Report.logCapture(Status.INFO, "Preenchendo os campos do formulário. ");
     }
 
-    private void confirmTransferSuccess() {
+    private void submitTransfer() {
         Element.click(transferPageObject.transferNowButton());
         validation.transferCompletedSuccessfully();
     }
 
-    private void dismissTransferModal() {
-        Element.click(transferPageObject.dismissModalButton());
+    private void closeModal() {
+        Element.click(transferPageObject.closeModalButton());
     }
 
     private void returnToPreviousPage() {
-        Element.click(transferPageObject.backPageButton());
+        Element.click(transferPageObject.returnButton());
     }
 
-    private void signOut() {
-        Element.click(accountScreenPageObject.exitAccountButton());
+    private void logoutUser() {
+        Element.click(accountScreenPageObject.logoutButton());
     }
 }

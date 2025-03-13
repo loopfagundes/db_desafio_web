@@ -43,6 +43,6 @@ public class LoginStep {
     }
 
     private void storeUserBalance(String fileName) {
-        ElementDataUtils.extractAndStore(accountScreenPageObject.balanceUserLabel(), "dataUser", fileName, "accountBalance");
+        ElementDataUtils.extractAndStore(accountScreenPageObject.userBalanceLabel(), "dataUser", fileName, "accountBalance");
     }
 }

@@ -30,13 +30,13 @@ public class CreateAccountStep {
         fillRegistrationFields(email, name, password);
         addBalanceToAccount();
         submitRegistration();
-        parseAccountData(userProp);
+        extractAccountDetails(userProp);
         validation.createAccountSuccess();
     }
 
     private void fillRegistrationFields(String email, String name, String password) {
         createAccountPage.registerEmailTextField().sendKeys(email);
-        createAccountPage.nameUserTextField().sendKeys(name);
+        createAccountPage.userNameTextField().sendKeys(name);
         createAccountPage.registerPasswordTextField().sendKeys(password);
         createAccountPage.confirmationPasswordTextField().sendKeys(password);
     }
@@ -49,10 +49,10 @@ public class CreateAccountStep {
         Element.click(createAccountPage.registerAccountButton());
     }
 
-    private void parseAccountData(String userProp) {
+    private void extractAccountDetails(String userProp) {
         Report.log(Status.INFO, "Extraindo dados da conta criada.");
         ElementDataUtils.extractAccountDetails(
-                createAccountPage.createdSuccessfullyModalLabel(),
+                createAccountPage.successModalLabel(),
                 userProp,
                 "account",
                 "digit"

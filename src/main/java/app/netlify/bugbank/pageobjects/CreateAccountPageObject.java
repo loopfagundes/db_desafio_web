@@ -22,7 +22,7 @@ public class CreateAccountPageObject {
         return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[2]/form/div[2]/input"));
     }
 
-    public WebElement nameUserTextField() {
+    public WebElement userNameTextField() {
         return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[2]/form/div[3]/input"));
     }
 
@@ -42,11 +42,11 @@ public class CreateAccountPageObject {
         return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[2]/div/div[2]/form/button"));
     }
 
-    public WebElement successCloseModalButton() {
+    public WebElement closeSuccessModalButton() {
         return wait.toBeClickable(By.id("btnCloseModal"));
     }
 
-    public WebElement createdSuccessfullyModalLabel() {
+    public WebElement successModalLabel() {
         return wait.visibilityOf(By.id("modalText"));
     }
 }
