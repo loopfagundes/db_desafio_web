@@ -21,7 +21,7 @@
          checkBalanceAvailability();
          amountToReceive();
          validation.accountMovement();
-         logoutAccount();
+         signOut();
      }
 
      private void bankStatement() {
@@ -37,7 +37,7 @@
          ElementDataUtils.extractAndStore(accountScreenPageObject.amountToReceiveLabel(), "dataUser", "secondUser", "amountToReceive");
      }
 
-     private void logoutAccount() {
+     private void signOut() {
          if (accountScreenPageObject.exitAccountButton().isDisplayed()) {
              accountScreenPageObject.exitAccountButton().click();
              Report.logCapture(Status.PASS, "O segundo usuario saiu da conta com sucesso.");

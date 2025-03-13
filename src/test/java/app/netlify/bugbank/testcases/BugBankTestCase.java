@@ -39,7 +39,7 @@ public class BugBankTestCase extends BaseTest {
             groups = {"web"},
             priority = 2)
     public void loginFirstUserTest() {
-        new LoginStep(driver()).performUserLoginFirst();
+        new LoginStep(driver()).loginAsFirstUser();
     }
 
     @Test(
@@ -56,7 +56,7 @@ public class BugBankTestCase extends BaseTest {
             groups = {"web"},
             priority = 4)
     public void loginSecondUserTest() {
-        new LoginStep(driver()).performUserLoginSecond();
+        new LoginStep(driver()).loginAsSecondUser();
     }
 
      @Test (
