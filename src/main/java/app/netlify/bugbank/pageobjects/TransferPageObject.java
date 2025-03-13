@@ -44,7 +44,7 @@ public class TransferPageObject {
         return wait.toBeClickable(By.id("btnBack"));
     }
 
-    public WebElement closeModalButton() {
+    public WebElement dismissModalButton() {
         return wait.toBeClickable(By.id("btnCloseModal"));
     }
 }

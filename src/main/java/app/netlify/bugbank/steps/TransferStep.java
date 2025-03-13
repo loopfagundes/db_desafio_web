@@ -5,6 +5,8 @@ import app.netlify.bugbank.pageobjects.TransferPageObject;
 import app.netlify.bugbank.utils.ElementDataUtils;
 import app.netlify.bugbank.utils.Report;
 import app.netlify.bugbank.validations.Validation;
+import app.netlify.bugbank.widgets.Element;
+
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 
@@ -25,12 +27,15 @@ public class TransferStep {
 
     public void makeTransfer() {
         processBankTransfer();
-        logoutAccount();
+        signOut();
     }
 
     private void processBankTransfer() {
+        accessTransfer();
         fillInTransferFields(loadProp());
         confirmTransferSuccess();
+        dismissTransferModal();
+        returnToPreviousPage();
         validation.checkRemainingBalance();
     }
 
@@ -38,8 +43,11 @@ public class TransferStep {
         return loadProperties("main", "dataUser", "secondUser");
     }
 
+    private void accessTransfer() {
+        Element.click(transferPageObject.transferButton());
+    }
+
     private void fillInTransferFields(Properties userProperties) {
-        transferPageObject.transferButton().click();
         Report.logCapture(Status.INFO, "Redirecionado para pagina de transferencia");
         transferPageObject.numberAccountTextField().sendKeys(userProperties.getProperty("account"));
         transferPageObject.digitTextField().sendKeys(userProperties.getProperty("digit"));
@@ -49,23 +57,19 @@ public class TransferStep {
     }
 
     private void confirmTransferSuccess() {
-        if (transferPageObject.transferNowButton().isDisplayed()) {
-            transferPageObject.transferNowButton().click();
-            validation.transferCompletedSuccessfully();
-            Report.logCapture(Status.PASS, "Transferência realizada com sucesso.");
-        } else {
-            Report.logCapture(Status.FAIL, "Erro ao realizar a transferência: botão não disponível.");
-        }
-        transferPageObject.closeModalButton().click();
-        transferPageObject.backPageButton().click();
+        Element.click(transferPageObject.transferNowButton());
+        validation.transferCompletedSuccessfully();
     }
 
-    private void logoutAccount() {
-        if (accountScreenPageObject.exitAccountButton().isDisplayed()) {
-            accountScreenPageObject.exitAccountButton().click();
-            Report.logCapture(Status.PASS, "Usuário saiu da conta com sucesso.");
-        } else {
-            Report.logCapture(Status.FAIL, "Erro ao sair da conta.");
-        }
+    private void dismissTransferModal() {
+        Element.click(transferPageObject.dismissModalButton());
+    }
+
+    private void returnToPreviousPage() {
+        Element.click(transferPageObject.backPageButton());
+    }
+
+    private void signOut() {
+        Element.click(accountScreenPageObject.exitAccountButton());
     }
 }
