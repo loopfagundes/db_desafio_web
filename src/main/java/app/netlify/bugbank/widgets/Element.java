@@ -11,13 +11,13 @@ public class Element {
         try {
             if (locator.isDisplayed() && locator.isEnabled()) {
                 locator.click();
-                Report.log(Status.PASS, "O botão " + locator.getText() + " recebeu um clique.");
+                Report.log(Status.PASS, "O botão " + locator + " recebeu um clique.");
             } else {
-                Report.logCapture(Status.FAIL, "O botão " + locator.getText() + " não recebeu um clique.");
+                Report.logCapture(Status.FAIL, "O botão " + locator + " não recebeu um clique.");
             }
         } catch (InvalidElementStateException | NoSuchElementException | StaleElementReferenceException |
                  TimeoutException e) {
-            throw new RuntimeException("Erro na validação do elemento.", e);
+            throw new RuntimeException("[click] Erro na validação do elemento.", e);
         }
     }
 
@@ -27,7 +27,7 @@ public class Element {
             jse.executeScript("arguments[0].click();", locator);
         } catch (InvalidElementStateException | NoSuchElementException | StaleElementReferenceException |
                  TimeoutException e) {
-            throw new RuntimeException("Erro na validação do elemento.", e);
+            throw new RuntimeException("[jse] Erro na validação do elemento.", e);
         }
     }
 
@@ -39,7 +39,7 @@ public class Element {
             }
         } catch (InvalidElementStateException | NoSuchElementException | StaleElementReferenceException |
                  TimeoutException e) {
-            throw new RuntimeException("Erro na validação do elemento.", e);
+            throw new RuntimeException("[Assert] Erro na validação do elemento.", e);
         }
     }
 }

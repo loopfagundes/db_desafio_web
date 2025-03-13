@@ -5,6 +5,8 @@ import app.netlify.bugbank.dto.UserModelDTO;
 import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
 import app.netlify.bugbank.utils.ElementDataUtils;
 import app.netlify.bugbank.validations.Validation;
+import app.netlify.bugbank.widgets.Element;
+
 import org.openqa.selenium.WebDriver;
 
 public class LoginStep {
@@ -19,7 +21,7 @@ public class LoginStep {
     private void performLogin(UserModelDTO user) {
         accountScreenPageObject.emailTextField().sendKeys(user.getEmail());
         accountScreenPageObject.passwordTextField().sendKeys(user.getPassword());
-        accountScreenPageObject.accessAccountButton().click();
+        Element.click(accountScreenPageObject.accessAccountButton());
     }
 
     public void performUserLoginFirst() {
