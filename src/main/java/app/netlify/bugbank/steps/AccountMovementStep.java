@@ -1,48 +1,48 @@
- package app.netlify.bugbank.steps;
+package app.netlify.bugbank.steps;
 
- import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
- import app.netlify.bugbank.utils.ElementDataUtils;
- import app.netlify.bugbank.utils.Report;
- import app.netlify.bugbank.validations.Validation;
- import com.aventstack.extentreports.Status;
- import org.openqa.selenium.WebDriver;
+import app.netlify.bugbank.pageobjects.AccountScreenPageObject;
+import app.netlify.bugbank.utils.ElementDataUtils;
+import app.netlify.bugbank.utils.Report;
+import app.netlify.bugbank.validations.Validation;
+import app.netlify.bugbank.widgets.Element;
 
- public class AccountMovementStep {
-     private final AccountScreenPageObject accountScreenPageObject;
-     private final Validation validation;
+import com.aventstack.extentreports.Status;
+import org.openqa.selenium.WebDriver;
 
-     public AccountMovementStep(WebDriver driver) {
-         accountScreenPageObject = new AccountScreenPageObject(driver);
-         validation = new Validation(driver);
-     }
+public class AccountMovementStep {
+    private final AccountScreenPageObject accountScreenPageObject;
+    private final Validation validation;
 
-     public void processAccountBalance() {
-         bankStatement();
-         checkBalanceAvailability();
-         amountToReceive();
-         validation.accountMovement();
-         logoutAccount();
-     }
+    public AccountMovementStep(WebDriver driver) {
+        accountScreenPageObject = new AccountScreenPageObject(driver);
+        validation = new Validation(driver);
+    }
 
-     private void bankStatement() {
-         Report.log(Status.INFO, "Movimento bancária do usuario");
-         accountScreenPageObject.balanceStatementButton().click();
-     }
+    public void processAccountBalance() {
+        viewBankStatement();
+        storeAvailableBalance();
+        storeIncomingTransferAmount();
+        validation.checkUpdateAccountBalance();
+        validation.incomingTransfer();
+        logoutUser();
+    }
 
-     private void checkBalanceAvailability() {
-         ElementDataUtils.extractAndStore(accountScreenPageObject.balanceAvailableLabel(), "dataUser", "secondUser", "updateAccountBalance");
-     }
+    private void viewBankStatement() {
+        Report.log(Status.INFO, "Movimento bancária do usuario");
+        accountScreenPageObject.balanceStatementButton().click();
+    }
 
-     private void amountToReceive() {
-         ElementDataUtils.extractAndStore(accountScreenPageObject.amountToReceiveLabel(), "dataUser", "secondUser", "amountToReceive");
-     }
+    private void storeAvailableBalance() {
+        ElementDataUtils.extractAndStore(accountScreenPageObject.balanceAvailableLabel(), "dataUser", "secondUser",
+                "updateAccountBalance");
+    }
 
-     private void logoutAccount() {
-         if (accountScreenPageObject.exitAccountButton().isDisplayed()) {
-             accountScreenPageObject.exitAccountButton().click();
-             Report.logCapture(Status.PASS, "O segundo usuario saiu da conta com sucesso.");
-         } else {
-             Report.logCapture(Status.FAIL, "Não saiu da conta.");
-         }
-     }
- }
+    private void storeIncomingTransferAmount() {
+        ElementDataUtils.extractAndStore(accountScreenPageObject.pendingAmountLabel(), "dataUser", "secondUser",
+                "incomingTransfer");
+    }
+
+    private void logoutUser() {
+        Element.click(accountScreenPageObject.logoutButton());
+    }
+}

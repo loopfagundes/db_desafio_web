@@ -36,11 +36,11 @@ public class TransferPageObject {
         return wait.toBeClickable(By.xpath("//*[@id='__next']/div/div[3]/form/button"));
     }
 
-    public WebElement transferSuccessfullyLabel() {
+    public WebElement transferSuccessLabel() {
         return wait.visibilityOf(By.id("modalText"));
     }
 
-    public WebElement backPageButton() {
+    public WebElement returnButton() {
         return wait.toBeClickable(By.id("btnBack"));
     }
 

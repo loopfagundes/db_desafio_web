@@ -18,11 +18,7 @@ public class BugBankTestCase extends BaseTest {
         return DriverManager.getDriver();
     }
 
-    @Test(
-            description = "Acessa a tela de login e criar novas contas de usuários.",
-            groups = {"web"},
-            priority = 1
-    )
+    @Test(description = "Acessa a tela de login e criar novas contas de usuários.", groups = { "web" }, priority = 1)
     public void registerTest() {
         CreateAccountStep createAccountStep = new CreateAccountStep(driver());
         registerUser(createAccountStep, firstUserData(), "firstUser");
@@ -31,41 +27,27 @@ public class BugBankTestCase extends BaseTest {
     }
 
     private void registerUser(CreateAccountStep createAccountStep, UserModelDTO userData, String userProp) {
-        createAccountStep.createNewUser(userData.getEmail(), userData.getName(), userData.getPassword(), userProp);
+        createAccountStep.registerNewUser(userData.getEmail(), userData.getName(), userData.getPassword(), userProp);
     }
 
-    @Test(
-            description = "Efetue o login do usuário primeiro",
-            groups = {"web"},
-            priority = 2)
+    @Test(description = "Efetue o login do usuário primeiro", groups = { "web" }, priority = 2)
     public void loginFirstUserTest() {
-        new LoginStep(driver()).performUserLoginFirst();
+        new LoginStep(driver()).loginAsFirstUser();
     }
 
-    @Test(
-            description = "Realizada a transferência bancária.",
-            groups = {"web"},
-            priority = 3
-    )
+    @Test(description = "Realizada a transferência bancária.", groups = { "web" }, priority = 3)
     public void transferTest() {
         new TransferStep(driver()).makeTransfer();
     }
 
-    @Test(
-            description = "Efetue o login do usuário segundo",
-            groups = {"web"},
-            priority = 4)
+    @Test(description = "Efetue o login do usuário segundo", groups = { "web" }, priority = 4)
     public void loginSecondUserTest() {
-        new LoginStep(driver()).performUserLoginSecond();
+        new LoginStep(driver()).loginAsSecondUser();
     }
 
-     @Test (
-             description = "Receber o saldo da transferência.",
-             groups = {"web"},
-             priority = 5
-     )
-     public void accountMovementTest() {
-         AccountMovementStep accountMovement = new AccountMovementStep(driver());
-         accountMovement.processAccountBalance();
-     }
+    @Test(description = "Receber o saldo da transferência.", groups = { "web" }, priority = 5)
+    public void accountMovementTest() {
+        AccountMovementStep accountMovement = new AccountMovementStep(driver());
+        accountMovement.processAccountBalance();
+    }
 }
