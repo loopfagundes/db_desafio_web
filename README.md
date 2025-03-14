@@ -105,25 +105,21 @@ Após a execução, os relatórios de teste podem ser acessados:
 
 1. Acesse de Actions:
 
-- Entre no repositório db_desafio_web - [GitHub Actions](https://github.com/loopfagundes/db_desafio_web/actions)
+   - Entre no repositório db_desafio_web - [GitHub Actions](https://github.com/loopfagundes/db_desafio_web/actions)
 
 2. Escolha o Workflow:
 
-- Selecione o workflow desejado na lista disponível.
-
-  
+   - Selecione o workflow desejado na lista disponível.
 
 3. Inicie o Workflow:
 
-- Caso o workflow permita execução manual, clique em "Re-run all jobs".
+   - Caso o workflow permita execução manual, clique em "Re-run all jobs".
 
-- Certifique-se de selecionar a opção 'build'.
-
-  
+   - Certifique-se de selecionar a opção 'build'.
 
 4. Acompanhe os Logs:
 
-- Clique na execução ativa do workflow para visualizar os logs e monitorar o progresso.
+   - Clique na execução ativa do workflow para visualizar os logs e monitorar o progresso.
 
 
 **Observação:**
