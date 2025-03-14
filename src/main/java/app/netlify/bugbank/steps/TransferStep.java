@@ -51,14 +51,15 @@ public class TransferStep {
         Report.logCapture(Status.INFO, "Redirecionado para pagina de transferencia");
         transferPageObject.numberAccountTextField().sendKeys(userProperties.getProperty("account"));
         transferPageObject.digitTextField().sendKeys(userProperties.getProperty("digit"));
-        ElementDataUtils.fakeValue(transferPageObject.transferAmountTextField(), "dataUser", "firstUser", "moneyTransferred");
+        ElementDataUtils.fakeValue(transferPageObject.transferAmountTextField(), "dataUser", "firstUser",
+                "moneyTransferred");
         transferPageObject.descriptionTextField().sendKeys("balance transfer.");
         Report.logCapture(Status.INFO, "Preenchendo os campos do formulário. ");
     }
 
     private void submitTransfer() {
         Element.click(transferPageObject.transferNowButton());
-        validation.transferCompletedSuccessfully();
+        validation.checkTransferSuccessMessage();
     }
 
     private void closeModal() {

@@ -20,42 +20,46 @@ public class CreateAccountStep {
         validation = new Validation(_driver);
     }
 
-    public void createNewUser(String email, String name, String password, String userProp) {
-        registerUser(email, name, password, userProp);
+    public void registerNewUser(String email, String name, String password, String userProp) {
+        performUserRegistration(email, name, password, userProp);
     }
 
-    private void registerUser(String email, String name, String password, String userProp) {
+    private void performUserRegistration(String email, String name, String password, String userProp) {
         Report.log(Status.INFO, "Iniciando cadastro de novo usuário.");
         Element.click(createAccountPage.registerButton());
-        fillRegistrationFields(email, name, password);
-        addBalanceToAccount();
-        submitRegistration();
-        extractAccountDetails(userProp);
-        validation.createAccountSuccess();
+        enterUserDetails(email, name, password);
+        enableInitialBalance();
+        confirmRegistration();
+        storeAccountDetails(userProp);
+        validation.accountCreatedSuccessfully();
+        closeSuccessModal();
     }
 
-    private void fillRegistrationFields(String email, String name, String password) {
+    private void enterUserDetails(String email, String name, String password) {
         createAccountPage.registerEmailTextField().sendKeys(email);
         createAccountPage.userNameTextField().sendKeys(name);
         createAccountPage.registerPasswordTextField().sendKeys(password);
         createAccountPage.confirmationPasswordTextField().sendKeys(password);
     }
 
-    private void addBalanceToAccount() {
+    private void enableInitialBalance() {
         Element.jsClick(driver, createAccountPage.balanceAccountButton());
     }
 
-    private void submitRegistration() {
+    private void confirmRegistration() {
         Element.click(createAccountPage.registerAccountButton());
     }
 
-    private void extractAccountDetails(String userProp) {
+    private void closeSuccessModal() {
+        Element.click(createAccountPage.closeSuccessModalButton());
+    }
+
+    private void storeAccountDetails(String userProp) {
         Report.log(Status.INFO, "Extraindo dados da conta criada.");
         ElementDataUtils.extractAccountDetails(
                 createAccountPage.successModalLabel(),
                 userProp,
                 "account",
-                "digit"
-        );
+                "digit");
     }
 }

@@ -31,18 +31,19 @@ public class LoginStep {
     public void loginAsFirstUser() {
         signIn(UserDataDTO.firstUserData());
         storeUserBalance("firstUser");
-        validation.firstUserAccount(UserDataDTO.firstUserData());
+        validation.checkFirstUserWelcomeMessage(UserDataDTO.firstUserData());
         validation.checkStoredBalanceForFirstUser();
     }
 
     public void loginAsSecondUser() {
         signIn(UserDataDTO.secondUserData());
         storeUserBalance("secondUser");
-        validation.validateSecondUserAccount(UserDataDTO.secondUserData());
+        validation.checkSecondUserWelcomeMessage(UserDataDTO.secondUserData());
         validation.checkStoredBalanceForSecondUser();
     }
 
     private void storeUserBalance(String fileName) {
-        ElementDataUtils.extractAndStore(accountScreenPageObject.userBalanceLabel(), "dataUser", fileName, "accountBalance");
+        ElementDataUtils.extractAndStore(accountScreenPageObject.userBalanceLabel(), "dataUser", fileName,
+                "accountBalance");
     }
 }
