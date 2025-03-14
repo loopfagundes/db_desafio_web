@@ -8,77 +8,123 @@
 >*É um Bug Bank, para que? É pratique de testes e automação de testes.*
 
 ---
+### :clipboard: Visão Geral
 
-#### O projeto é exclusivamente para [DBServer](https://db.tec.br/).
-
----
-
-:clipboard: Realizar Transferência entre Contas Passo –a –passo :
-
-:heavy_check_mark: Acessar o site [Bug Bank](https://bugbank.netlify.app/)
-
-:heavy_check_mark: Criar duas contas com Saldo e salvar os seus dados.
-
-:heavy_check_mark: Acessar uma conta e realizar uma transferência de valor para outra.
-
-:heavy_check_mark: Validar a saída e entrada de valores das contas envolvidas
+Este projeto foi desenvolvido exclusivamente para [DBServer](https://db.tec.br/) e tem como objetivo demonstrar competências em testes de software.
 
 ---
 
-### Ferramentas que foi ulitizado?
+### :wrench: Tecnologias e Ferramentas Utilizadas
 
-#### Construido com a estrutura:
+#### Estrutura:
 
-:pushpin: [MAVEN](https://maven.apache.org/download.cgi),
-
-:pushpin: [JAVA 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+:pushpin: [MAVEN](https://maven.apache.org/download.cgi) - Gerenciador de dependências e automação de build.
+    
+:pushpin: [JAVA 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) - Linguagem de programação principal do projeto.
 
 #### Dependencias:
-:pushpin: [TestNG](https://mvnrepository.com/artifact/org.testng/testng/7.10.2),  
+:pushpin: [TestNG](https://mvnrepository.com/artifact/org.testng/testng/7.11.0) - Framework de teste. 
 
-:pushpin: [Selenium Java](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java/4.22.0),  
+:pushpin: [Selenium Java](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java/4.29.0) - Automatação de testes para aplicações web.
 
-:pushpin: [WebDriverManager](https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager/5.8.0),
+:pushpin: [WebDriverManager](https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager/5.9.0) - Gerenciamento de drivers do navegador.
 
-:pushpin: [Extent Reports TestNG Adapter](https://mvnrepository.com/artifact/com.aventstack/extentreports-testng-adapter/1.0.3)
+:pushpin: [Extent Reports TestNG Adapter](https://mvnrepository.com/artifact/com.aventstack/extentreports-testng-adapter/1.0.3) - Geração de relatórios de execução.
 
-:pushpin: [Java Faker](https://mvnrepository.com/artifact/com.github.javafaker/javafaker/1.0.2)
+:pushpin: [Java Faker](https://mvnrepository.com/artifact/com.github.javafaker/javafaker/1.0.2) - Geração de dados fictícios para testes.
 
-:pushpin: [Lombok](https://mvnrepository.com/artifact/org.projectlombok/lombok/1.18.34)
+:pushpin: [Lombok](https://mvnrepository.com/artifact/org.projectlombok/lombok/1.18.36) - Redução de boilerplate no código.
 
 ---
+#### Clonando o Repositório:
 
-### Baixando o projeto:
+Execute o seguinte comando em seu terminal ou utilize sua IDE favorita:
 
-Para baixar o projeto, abrir o comando ou dentro IDE:
-```bash
-git clone https://github.com/loopfagundes/db_desafio_web.git
+```
+git clone https://github.com/loopfagundes/db_desafio.git
 ```
 
-#### Como executar?
-Para executar na sua máquina local, o comando ou através de sua IDE:
-```bash
+#### Executando os Testes:
+
+Para rodar os testes localmente, utilize os comandos abaixo:
+
+  
+```
+mvn clean
+``` 
+
+```
+mvn install -DskipTests=true
+```
+
+```
 mvn test
 ```
-Padrão do browser Chrome.
-Para executar no Firefox ou Edge,  caminho para acessar de pastas dentro IDE:
+
+Por padrão, os testes serão executados no navegador Chrome. Para alternar para outros navegadores (Firefox ou Edge), edite o seguinte arquivo:
+
+  
 ```
-src/main/java/app.netlify.bugbank/utils/BaseTest
+src/main/java/app/netlify/bugbank/utils/BaseTest
 ```
-```java
-@BeforeMethod  
+
+```
+@BeforeMethod
 DriverFactory.createInstance(BrowserEnum.CHROME);
 ```
-`BrowserEnum.Chrome` ".Chrome" tem opção para Firefox ou Edge.
+
+Substitua `BrowserEnum.CHROME` por `BrowserEnum.FIREFOX` ou `BrowserEnum.EDGE`, conforme sua necessidade.
 
 ---
-#### Report:
-Após a execução do projeto, para visualizar o relatório: 
-Abra a pasta de report e selecione o arquivo report.html. 
-Clique com o botão direito do mouse, vá em "Open in", depois "Browser" e escolha o navegador da sua preferência.
+#### Relatórios:
+
+Após a execução, os relatórios de teste podem ser acessados:
+
+
+1. Navegue até a pasta `report`.
+
+2. Abra o arquivo `report.html`.
+
+3. No IntelliJ IDEA:
+
+   - Clique com o botão direito do mouse, selecione `Open in`, e escolha o navegador desejado.
+
+
+4. No VSCode:
+
+   - Clique com o botão direito do mouse, selecione `Reveal in File Explorer`, e uma janela da pasta será aberta. Clique no arquivo report.html para visualizá-lo.
 
 #### Screenshot: 
 ![](src/main/resources/img/report.png)
+
+---
+
+#### 📊 Como Executar o Pipeline:
+
+  
+
+1. Acesse de Actions:
+
+   - Entre no repositório db_desafio_web - [GitHub Actions](https://github.com/loopfagundes/db_desafio_web/actions)
+
+2. Escolha o Workflow:
+
+   - Selecione o workflow desejado na lista disponível.
+
+3. Inicie o Workflow:
+
+   - Caso o workflow permita execução manual, clique em "Re-run all jobs".
+
+   - Certifique-se de selecionar a opção 'build'.
+
+4. Acompanhe os Logs:
+
+   - Clique na execução ativa do workflow para visualizar os logs e monitorar o progresso.
+
+
+**Observação:**
+
+-  **Outros Workflow**: Os demais fluxos de trabalho são atualizados conforme as implementações, com o objetivo de melhorar a estrutura do código e a qualidade dos testes.
 
 ---
 Feito com bug, café e muito esforço :beetle::coffee:
